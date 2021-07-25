@@ -1,0 +1,43 @@
+.progress-bar {
+  background-color: var(--color-graydd);
+  border-radius: 4px;
+  height: 8px;
+  position: relative;
+  width: 100%;
+
+  &.x25::after {
+    content: '';
+    position: absolute;
+    background-color: var(--color-teal);
+    border-radius: 4px;
+    height: 8px;
+    width: calc(100% * 1 / 4);
+  }
+
+  &.x50::after {
+    content: '';
+    position: absolute;
+    background-color: var(--color-yellow);
+    border-radius: 4px;
+    height: 8px;
+    width: calc(100% * 2 / 4);
+  }
+
+  &.x75::after {
+    content: '';
+    position: absolute;
+    background-color: var(--color-orange);
+    border-radius: 4px;
+    height: 8px;
+    width: calc(100% * 3 / 4);
+  }
+  
+  &.x100::after {
+    content: '';
+    position: absolute;
+    background-color: var(--color-pink);
+    border-radius: 4px;
+    height: 8px;
+    width: calc(100% * 4 / 4);
+  }
+}

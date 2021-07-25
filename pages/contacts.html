@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Data warehouse</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='../styles/main.css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <div id="modal">
+    <!-- Se inyecta el modal dinamicamente -->
+  </div>
+
+  <header id="header">
+    <!-- Se inyecta el navbar dinamicamente -->
+  </header>
+
+  <main class="container">
+    <h1 class="title">Contactos</h1>
+
+    <section class="mb-32">
+      <div class="flex justify-content-space-between mb-4">
+  
+        <div class="input-group">
+          <div class="btn btn-secondary dropdown-menu lg border-color-gray">
+            <span></span>
+            <span class="material-icons dropdown-toggler text-gray">arrow_drop_down</span>
+            <div class="dropdown-content">
+              <div class="list lg text-black">
+                <button class="list-item">Exportar seleccionados</button>
+                <button class="list-item">Todos los filtrados</button>
+              </div>
+            </div>
+          </div>
+          <button class="btn-icon btn-secondary border-color-gray">
+            <span class="material-icons">search</span>
+          </button>
+        </div>
+  
+        <div class="input-group">
+          <button id="import-btn" class="btn-icon btn-secondary"><span class="material-icons">publish</span></button>
+          <div class="btn btn-secondary dropdown-menu">
+            <span>Exportar contactos</span>
+            <span class="material-icons dropdown-toggler">arrow_drop_down</span>
+            <div class="dropdown-content">
+              <div class="list">
+                <button class="list-item-link">Exportar seleccionados</button>
+                <button class="list-item-link">Todos los filtrados</button>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary">Agregar contactos</button>
+        </div>
+  
+      </div>
+
+      <div>
+        <span class="tag tag-dark">
+            Argentina
+          <span class="material-icons action-icon">clear</span>
+        </span>
+      </div>
+
+    </section>
+
+    <section>
+      <div class="mb-4">
+        <span id="count-selected-tag" class="tag tag-light"></span>
+      </div>
+      <table class="table mb-16">
+        <thead>
+          <tr >
+            <th>
+              <input type="checkbox" name="" id="contact-table-chk" class="master-chk">
+            </th>
+            <th>
+              <span>
+                Contacto 
+                <span class="material-icons action-icon">swap_vert</span>
+              </span>
+            </th>
+            <th>
+              <span>
+                País/Región
+                <span class="material-icons action-icon">swap_vert</span>
+              </span>
+            </th>
+            <th>
+              <span>
+                Compañía
+                <span class="material-icons action-icon">swap_vert</span>
+              </span>
+            </th>
+            <th>
+              <span>
+                Cargo
+                <span class="material-icons action-icon">swap_vert</span>
+              </span>
+            </th>
+            <th>
+              <span>
+                Canal preferido
+                <span class="material-icons action-icon">swap_vert</span>
+              </span>
+            </th>
+            <th>
+              <span>
+                Interés
+                <span class="material-icons action-icon">swap_vert</span>
+              </span>
+            </th>
+            <th >
+              <span class="justify-content-center">
+                Acciones
+                <span class="material-icons action-icon">swap_vert</span>
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody id="tbody-contactos">
+          <!-- Aqui se inyectan cada una de las filas de la tabla -->
+        </tbody>
+      </table>
+      <div id="contact-table-footer" class="flex justify-content-space-between">
+        <div class="flex text-gray">
+          <span>Filas por página</span>
+          <span id="rows-per-page" class="flex ml-16">
+            <select name="" id="" class="mini-input text-gray">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+            </select>
+          </span>
+        </div>
+        <div class="flex text-gray">
+          <span>1-10 de 30 filas</span>
+          <span class="ml-48">
+            <span class="material-icons action-icon">navigate_before</span>
+            <span class="material-icons action-icon ml-16">navigate_next</span>
+          </span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src='../src/contacts.js' type="module"></script>
+  <script src="../src/styles.js"></script>
+</body>
+</html>

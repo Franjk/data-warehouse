@@ -1,0 +1,27 @@
+.tag {
+  align-items: center;
+  border-radius: 4px;
+  display: inline-flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  height: 24px;
+  padding: 0 10px;
+}
+
+.tag-light {
+  color: var(--color-blue);
+  background-color: var(--color-light-teal);
+}
+
+.tag-dark {
+  background-color: var(--color-black-10);
+  color: var(--color-black);
+}
+
+.table-row-highlight {
+  .tag-light {
+    background-color: var(--color-light-blue);
+    border-color: transparent;
+    color: var(--color-white);
+  }
+}

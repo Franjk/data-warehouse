@@ -1,0 +1,8 @@
+.action-icon {
+  cursor: pointer;
+  user-select: none;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>DW - Login</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='../styles/main.css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <header id="header">
+    <!-- El navbar sera inyectado aqui -->
+  </header>
+
+  <main class="flex justify-content-center align-items-center vh-60">
+    <form id="login-form" class="form">
+      <h1 class="title">Bienvenido</h1>
+      <div>
+        <div class="mb-4">
+          <input class="input lg" type="text" name="username" id="username" placeholder="Nombre de usuario">
+        </div>
+        <div>
+          <span class="input-error-message display-none" id="username-error"></span>
+        </div>
+      </div>
+      <div>
+        <div class="mb-4">
+          <input class="input lg" type="password" name="password" id="password" placeholder="Contraseña">
+        </div>
+        <div>
+          <span class="input-error-message display-none" id="password-error"></span>
+        </div>
+      </div>
+      <button id="submit-button" class="btn btn-primary align-self-end">Ingresar</button>
+    </form>
+  </main>
+  <script src="../src/styles.js"></script>
+  <script src='../src/login.js' type="module"></script>
+</body>
+</html>

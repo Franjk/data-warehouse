@@ -1,0 +1,36 @@
+.list {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-graycc);
+  border-radius: 4px;
+  width: 173px;
+
+  &.lg {
+    width: 502px;
+  }
+
+  .list-item {
+    align-items: center;
+    display: flex;
+    flex-flow: row nowrap;
+    height: 56px;
+    padding: 0 8px;
+    width: 100%;
+
+
+  }
+
+  .list-item-link {
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+    flex-flow: row nowrap;
+    height: 56px;
+    padding: 0 8px;
+    width: 100%;
+  
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+}

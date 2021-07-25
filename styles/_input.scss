@@ -1,0 +1,74 @@
+// .input[type=checkbox] {
+// 	appearance: none;
+// 	background-color: red;
+//   border: 1px solid green;
+//   width: 32px;
+//   height: 32px;
+
+//   &:checked {
+//     color: red;
+
+//     &:after {
+//       content: '\2714';
+//       font-size: 14px;
+//       position: absolute;
+//       top: 0px;
+//       left: 3px;
+//       color: #99a1a7;
+//     }
+
+//   }
+// }
+
+.input[type=text], 
+.input[type=password] {
+  border: 1px solid var(--border-color-base);
+  border-radius: 4px;
+  display: inline-block;
+  
+
+  &:disabled {
+    border: 1px solid var(--color-disabled);
+    background-color: rgba(0,0,0,0.10);
+    cursor: not-allowed;
+  }
+
+  &.error {
+    border-color: var(--color-error);
+  }
+}
+
+select.input {
+  border: 1px solid var(--border-color-base);
+  border-radius: 4px;
+  background-color: var(--color-white);
+
+}
+
+.input {
+  padding: 6px 9px;
+  width: 190px;
+  height: 36px;
+
+  &.lg {
+    width: 380px;
+  }
+}
+
+.input-group {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 9px;
+}
+
+.input-error-message {
+  color: var(--color-error);
+  padding-left: 9px;
+}
+
+select.mini-input {
+  background-color: var(--color-white);
+  border: transparent;
+  cursor: pointer;
+  outline: none;
+}

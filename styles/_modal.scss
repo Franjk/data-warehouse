@@ -1,0 +1,36 @@
+.modal {
+  align-items: center;
+  background-color: var(--color-white);
+  border-radius: 4px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  height: 300px;
+  padding: 16px 31px 24px 31px;
+  position: relative;
+  width: 340px;
+  z-index: 51;
+
+  * {
+    // border: 1px solid red;
+  }
+}
+
+.modal-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  position: fixed;
+  width: 100vw;
+  z-index: 50;
+}
+
+.modal-overlay {
+  background-color: var(--color-black-90);
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}

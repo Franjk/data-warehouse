@@ -1,0 +1,42 @@
+.navbar {
+  align-items: center;
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  display: flex;
+  flex-flow: row nowrap;
+  height: 64px;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.navbar-menu {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  height: 100%;
+}
+
+.navbar-item {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  padding: 0 1px;
+  margin-left: 34px;
+  
+  a {
+    color: var(--color-white);
+    text-decoration: none;
+  }
+}
+
+.navbar-item.active {
+  font-weight: bold;
+  border-bottom: 2px solid var(--color-white);
+}
+
+.navbar-logo {
+  align-items: center;
+  display: flex;
+  font-weight: bold;
+  height: 100%;
+}
