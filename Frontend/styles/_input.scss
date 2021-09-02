@@ -21,6 +21,7 @@
 // }
 
 .input[type=text], 
+.input[type=email], 
 .input[type=password] {
   border: 1px solid var(--border-color-base);
   border-radius: 4px;
@@ -51,7 +52,13 @@ select.input {
   height: 36px;
 
   &.lg {
+    height: 42px;
     width: 380px;
+  }
+
+  &:focus-visible {
+    outline: none;
+    border: 1px solid #444;
   }
 }
 
@@ -66,9 +73,26 @@ select.input {
   padding-left: 9px;
 }
 
+.input-label-group {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
 select.mini-input {
   background-color: var(--color-white);
   border: transparent;
   cursor: pointer;
   outline: none;
+}
+
+.label {
+  font-size: 12px;
+}
+
+.required {
+  &::after {
+    content: '*';
+    color: var(--color-error);
+  }
 }

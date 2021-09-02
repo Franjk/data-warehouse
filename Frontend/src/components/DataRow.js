@@ -1,10 +1,24 @@
 import { Component } from '../libs/xQuery/xQuery.js';
 
 class DataRow extends Component {
-  constructor(props) {
+  constructor(parentEl, props) {
     super(document.createElement('tr'));
-    this.state = { ...props }
+
+    this.state = { 
+      id: 0, 
+      selected: false, 
+      name: '', 
+      email: '',
+      country: '', 
+      region: '', 
+      company: '', 
+      position: '', 
+      preferedChannels: [], 
+      interest: 0,
+      ...props,
+    }
     this.render()
+    parentEl.appendChild(this.$);
   }
 
   render() {
@@ -89,32 +103,49 @@ class DataRow extends Component {
         </span>
   
       </td>
-      <td class="text-align-center p-0">
-        <span class="material-icons action-icon text-gray">more_horiz</span>
+      <td class="text-align-center p-0 flex justify-content-center">
+        <div class="dropdown-menu">
+          <span class="material-icons action-icon text-gray dropdown-toggler">more_horiz</span>
+          <div class="dropdown-content display-none offset-xr-sm offset-y-sm">
+            <div class="dropdown-list">
+              <button class="dropdown-item" type="button">Eliminar</button>
+              <button class="dropdown-item" type="button">Modificar</button>
+            </div>
+          </div>
+        
+        </div>
       </td>
     `
     if (selected) this.$.classList.add('table-row-highlight');
   
     const chkInput = this.$.querySelector('.contact-table-row-chk')
-    
-    chkInput.addEventListener('change', () => {
-        chkInput.dispatchEvent(new CustomEvent('highlight'));
-        document.querySelector('#contact-table-chk')
-          .dispatchEvent(new CustomEvent('check'));
-      })
-
-    chkInput.addEventListener('highlight', () => {
-      if (chkInput.checked) {
-        this.$.classList.add('table-row-highlight');
-      } else {
-        this.$.classList.remove('table-row-highlight');
-      }
-      document.querySelector('#count-selected-tag')
-        .dispatchEvent(new Event('change'));
-    })
+    chkInput.addEventListener('update', () => this.onChkInputUpdate(chkInput))
   
     return this;
   }
+
+  onChkInputUpdate(chk) {
+    if (chk.checked) {
+      this.addClass('table-row-highlight');
+      this.state.selected = true;
+    } else {
+      this.removeClass('table-row-highlight');
+      this.state.selected = true;
+    }
+    document.dispatchEvent(new CustomEvent('update-count-selected-tag'));
+  }
+
+  setState(newState) {
+    this.state = {
+      ...this.state,
+      ...newState,
+    }
+
+    this.render();
+    return this;
+  }
+
+
 }
 
 export default DataRow;

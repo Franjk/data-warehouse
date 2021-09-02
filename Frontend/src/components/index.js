@@ -1,9 +1,11 @@
-import Navbar from './Navbar.js';
+import ContactsTable from './ContactsTable.js';
 import DataRow from './DataRow.js';
 import ImportModal from './ImportModal.js'
+import Navbar from './Navbar.js';
 
 export {
-  Navbar,
+  ContactsTable,
   DataRow,
   ImportModal,
+  Navbar,
 }

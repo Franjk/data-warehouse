@@ -9,7 +9,7 @@ class ImportModal extends Component {
   render() {
     this.$.classList.add('modal-container');
     this.$.innerHTML = `
-      <div class="modal">
+      <div class="modal sm">
       <img src="../../assets/cloud-upload.png" alt="" width="105px"></img>
         <div class="text-dark-gray font-md text-align-center">
           Selecciona el archivo de tu ordenador para importar tus contactos.

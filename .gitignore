@@ -1,1 +1,3 @@
 /specifications
+node_modules
+.env

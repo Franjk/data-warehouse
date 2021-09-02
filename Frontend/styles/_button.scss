@@ -48,7 +48,22 @@
   color: var(--color-blue);
 }
 
+.btn-success {
+  background-color: var(--color-green);
+  border: 1px solid var(--color-green);
+  color: var(--color-white);
+  font-weight: bold;
+}
+
 .btn-terciary {
   background-color: var(--color-white);
   color: var(--color-blue);
+  
+}
+
+.btn-danger-outline {
+  background-color: var(--color-white);
+  border: transparent;
+  color: var(--color-red);
+  font-weight: bold;
 }

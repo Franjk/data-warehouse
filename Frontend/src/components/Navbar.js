@@ -1,10 +1,12 @@
 import { Component } from '../libs/xQuery/xQuery.js';
 
 class Navbar extends Component {
-  constructor(props) {
+  constructor(parentEl, props) {
     super(document.createElement('nav'))
     this.state = { ...props }
     this.render();
+
+    parentEl.appendChild(this.$);
   }
 
   render() {

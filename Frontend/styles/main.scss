@@ -16,6 +16,14 @@
 @import './loader';
 @import './modal';
 
+.clickable {
+  cursor: pointer;
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
 .display-none {
   display: none !important;
 }
@@ -106,6 +114,10 @@
 
 .border-color-gray {
   border-color: var(--color-graycc);
+}
+
+.font-sm {
+  font-size: 12px;
 }
 
 .font-md {
