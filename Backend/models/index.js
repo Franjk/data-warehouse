@@ -15,13 +15,13 @@ Contact.belongsTo(City);
 Contact.belongsTo(Company);
 Contact.belongsToMany(Channel, { through: ContactChannel });
 
-ContactChannel.belongsTo(Contact, { onDelete: 'cascade' });
+ContactChannel.belongsTo(Contact, { onDelete: 'cascade', foreignKey: { allowNull: false } });
 
 City.hasMany(Contact);
-City.belongsTo(Country, { onDelete: 'cascade' });
+City.belongsTo(Country, { onDelete: 'cascade', foreignKey: { allowNull: false } });
 
 Country.hasMany(City);
-Country.belongsTo(Region, { onDelete: 'cascade' });
+Country.belongsTo(Region, { onDelete: 'cascade', foreignKey: { allowNull: false } });
 
 Region.hasMany(Country);
 
