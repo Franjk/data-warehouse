@@ -6,13 +6,26 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-front": "live-server Frontend",
-    "front": "http-server Frontend"
+    "front": "http-server Frontend",
+    "dev-back": "nodemon Backend/app.js",
+    "back": "node Backend/app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^7.32.0",
     "http-server": "^13.0.1",
-    "live-server": "^1.2.1"
+    "live-server": "^1.2.1",
+    "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.0",
+    "sequelize": "^6.6.5"
   }
 }

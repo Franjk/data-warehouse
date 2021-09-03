@@ -1,4 +1,4 @@
-import DWApi from "./libs/DWApi/DWApi.js";
+import DWApi from './libs/DWApi/DWApi.js';
 
 const dw = new DWApi();
 
