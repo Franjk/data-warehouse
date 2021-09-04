@@ -1,5 +1,5 @@
-import { Component } from '../libs/xQuery/xQuery.js'
-import DataRow from './DataRow.js'
+import { Component } from '../libs/xQuery/xQuery.js';
+import ContactsTableRow from './ContactsTableRow.js';
 
 class ContactsTable extends Component {
   constructor(parentEl, props) {
@@ -14,7 +14,7 @@ class ContactsTable extends Component {
       updateTotalRowsTag: () => {},
       updateCurrentRowsTag: () => {},
       ...props,
-     }
+    };
     this.children = [];
 
     this.render();
@@ -75,7 +75,7 @@ class ContactsTable extends Component {
           <!-- Aqui se inyectan cada una de las filas de la tabla -->
         </tbody>
       </table>
-    `
+    `;
 
     this.children = [];
 
@@ -102,15 +102,15 @@ class ContactsTable extends Component {
       })
       .slice(
         (this.state.page - 1) * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage
-        )
+      )
       .forEach(cd => {
         this.children.push(
-          new DataRow(
+          new ContactsTableRow(
             this.$.querySelector('[data-anchor="contacts-table-body"]'), 
             {...cd}
           )
         );
-      })
+      });
 
     const btnOrderName = this.$.querySelector('[data-select="btn-order-name"]');
     const btnOrderCountry = this.$.querySelector('[data-select="btn-order-country"]');
@@ -134,7 +134,7 @@ class ContactsTable extends Component {
       this.state.data = [
         ...this.state.data,
         ...this.children.map(c => c.state),
-      ]
+      ];
     }
   }
 
@@ -142,7 +142,7 @@ class ContactsTable extends Component {
     let newDirection = 'asc';
     if (this.state.orderBy.field === columnName 
       && this.state.orderBy.direction === 'asc') {
-        newDirection = 'desc'
+      newDirection = 'desc';
     }
 
     this.setState({
@@ -150,7 +150,7 @@ class ContactsTable extends Component {
         field: columnName,
         direction: newDirection,
       }
-    })
+    });
   }
 
   switchPage(page) {
@@ -160,23 +160,23 @@ class ContactsTable extends Component {
 
     if (page === 'previous') {
       if (this.state.page === 1) return;
-      console.log('previous')
+      console.log('previous');
       this.setState({
         page: this.state.page - 1,
-      })
+      });
       
       
     } else if (page === 'next') {
       if (this.state.page === maxPage) return;
       this.setState({
         page: this.state.page + 1,
-      })
+      });
 
 
     } else if (page >= 1 && page <= maxPage) {
       this.setState({
         page: Number(page),
-      })
+      });
 
     }
 

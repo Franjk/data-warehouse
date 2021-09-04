@@ -9,7 +9,7 @@ function unHideElement(el) {
 }
 
 function toggleElement(el) {
-  el.classList.toggle('display-none')
+  el.classList.toggle('display-none');
 }
 
 function isHidden(el) {
@@ -46,6 +46,15 @@ function documentClickHandler(e) {
     }
   }
 
+  // # Hidden Menus
+  if (el.classList.contains('hidden-toggler')) {
+    if (el.parentElement.classList.contains('hidden-menu')) {
+      const hiddenContent = el.parentElement.querySelector('.hidden-content');
+      unHideElement(hiddenContent);
+      hideElement(el);
+    }
+  }
+
 
 
   // # Inputs
@@ -56,7 +65,7 @@ function documentClickHandler(e) {
       .forEach(chk => {
         chk.checked = el.checked;
         chk.dispatchEvent(new CustomEvent('update'));
-      })
+      });
   }
 
   if (el.dataset.masterChk) {
@@ -68,7 +77,7 @@ function documentClickHandler(e) {
       .forEach(chk => {
         total += 1;
         if (chk.checked) checkedCount += 1;
-      })
+      });
 
     if(checkedCount === 0) {
       masterChk.indeterminate = false;
@@ -100,11 +109,11 @@ function styleComponents() {
         console.log(el);
         document.querySelectorAll(`[data-master-chk="${el.id}"]`)
           .forEach(chk => {
-            console.log(chk)
+            console.log(chk);
             chk.checked = el.checked;
             chk.dispatchEvent(new CustomEvent('update'));
-          })
-      })
+          });
+      });
 
       el.addEventListener('check', () => {
         let total = 0;
@@ -114,7 +123,7 @@ function styleComponents() {
           .forEach(chk => {
             total += 1;
             if (chk.checked) checkedCount += 1;
-          })
+          });
 
         if(checkedCount === 0) {
           el.indeterminate = false;
@@ -126,9 +135,9 @@ function styleComponents() {
           el.indeterminate = false;
           el.checked = true;
         }
-      })
+      });
    
-    })
+    });
 
 
   hideAllDropdownContent();
