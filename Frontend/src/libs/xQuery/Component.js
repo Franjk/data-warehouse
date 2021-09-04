@@ -50,12 +50,12 @@ class Component {
 
   select(query) {
     const prefix = query.slice(0, 2);
-    if (prefix = 's:') {
+    if (prefix === 's:') {
       const content = query.slice(2);
-      query = `[data-select="${content}"]`
-    } else if (prefix = 'a:') {
+      query = `[data-select="${content}"]`;
+    } else if (prefix === 'a:') {
       const content = query.slice(2);
-      query = `[data-anchor="${content}"]`
+      query = `[data-anchor="${content}"]`;
     }
     return this.$.querySelector(query);
   }
@@ -76,7 +76,7 @@ class Component {
     this.state = {
       ...this.state,
       ...newState,
-    }
+    };
 
     this.render();
     return this;

@@ -22,6 +22,35 @@ export async function get(url, query) {
   }
 }
 
+export async function post(url, body) {
+  try {
+    console.log('post', JSON.stringify(body));
+    const objUrl = new URL(`${HOST}/${url}`);
+
+    const res = await fetch(objUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    return err;
+  }
+}
+
+export async function put(url, body) {
+  try {
+    const objUrl = new URL(`${HOST}/${url}`);
+    const res = await fetch(objUrl, {method: 'PUT', body: JSON.stringify(body)});
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    return err;
+  }
+}
+
 export async function destroy(url) {
   try {
     const objUrl = new URL(`${HOST}/${url}`);

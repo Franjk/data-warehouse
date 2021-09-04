@@ -24,7 +24,7 @@ exports.readAll = async (req, res) => {
   const where = {};
 
   if (name) where.name = { [Op.like]: `%${name}%` };
-  if (regionId) where.precio = regionId;
+  if (regionId) where.regionId = regionId;
 
   query.where = where;
   if (limit) query.limit = Number.parseInt(limit, 10);

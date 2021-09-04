@@ -7,11 +7,10 @@ async function populate() {
 
   await Channel.bulkCreate([
     { id: 1, name: 'Whatsapp' },
-    { id: 2, name: 'Instagram' },
-    { id: 3, name: 'Facebook' },
+    { id: 2, name: 'Facebook' },
+    { id: 3, name: 'Twitter' },
     { id: 4, name: 'Email' },
-    { id: 5, name: 'Llamada' },
-    { id: 6, name: 'Mensaje' },
+    { id: 5, name: 'Teléfono' },
   ]);
 
   await Region.bulkCreate([

@@ -11,8 +11,6 @@ class ContactsTable extends Component {
       data: [],
       orderBy: { field: 'name', direction: 'asc' },
       filter: '',
-      updateTotalRowsTag: () => {},
-      updateCurrentRowsTag: () => {},
       ...props,
     };
     this.children = [];
@@ -29,7 +27,7 @@ class ContactsTable extends Component {
             <th>
               <input type="checkbox" name="" id="contact-table-chk" class="master-chk">
             </th>
-            <th>
+            <th style="width:200px;">
               <span>
                 Contacto 
                 <span class="material-icons action-icon" data-select="btn-order-name">swap_vert</span>
@@ -53,7 +51,7 @@ class ContactsTable extends Component {
                 <span class="material-icons action-icon" data-select="btn-order-position">swap_vert</span>
               </span>
             </th>
-            <th>
+            <th style="min-width:80px;">
               <span>
                 Canal preferido
               </span>
@@ -85,7 +83,8 @@ class ContactsTable extends Component {
       .filter(el => {
         let isIncluded = false;
         for (let prop in el) {
-          const strPropVal = el[prop].toString().toUpperCase();
+          const propVal = el[prop] ?? '';
+          const strPropVal = propVal.toString().toUpperCase();
           if (strPropVal.includes(this.state.filter.toUpperCase())) {
             isIncluded = true;
             break;
@@ -125,8 +124,8 @@ class ContactsTable extends Component {
     btnOrderInterest.addEventListener('click', () => this.reorderTable('interest'));
 
     document.dispatchEvent(new CustomEvent('update-count-selected-tag'));
-    this.state.updateCurrentRowsTag(this.startRow, this.endRow);
-    this.state.updateTotalRowsTag(this.totalRows);
+    document.dispatchEvent(new CustomEvent('update-current-rows', { detail: { startRow: this.startRow, endRow: this.endRow }}));
+    document.dispatchEvent(new CustomEvent('update-total-rows', { detail: { totalRows: this.totalRows }}));
   }
 
   syncState() {
@@ -180,7 +179,7 @@ class ContactsTable extends Component {
 
     }
 
-    this.state.updateCurrentRowsTag(this.startRow, this.endRow);
+    document.dispatchEvent(new CustomEvent('update-current-rows', { detail: { startRow: this.startRow, endRow: this.endRow }}));
   }
 
   get startRow() {
