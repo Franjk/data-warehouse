@@ -1,8 +1,10 @@
-import {
-  mockLogin, mockAuthenticate,
-} from './mock.js';
+import { mockLogin, mockAuthenticate } from './mock.js';
 
-class DWApi {
+import { get } from './methods.js';
+
+
+
+class DW {
   constructor(token) {
     this.token = token;
   }
@@ -29,7 +31,7 @@ class DWApi {
     if (!token) return false;
 
     try {
-      const res = await mockAuthenticate(token)
+      const res = await mockAuthenticate(token);
 
       if (res) {
         return true;
@@ -39,6 +41,12 @@ class DWApi {
       return false;
     }
   }
+
+  async getAllContacts() {
+    const res = await get('contacts');
+    console.log(res);
+    return res;
+  }
 }
 
-export default DWApi;
+export default DW;
