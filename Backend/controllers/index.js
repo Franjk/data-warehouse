@@ -1,3 +1,4 @@
+const authController = require('./auth.controller');
 const channelController = require('./channel.controller');
 const cityController = require('./city.controller');
 const companyController = require('./company.controller');
@@ -8,6 +9,7 @@ const regionController = require('./region.controller');
 const userController = require('./user.controller');
 
 module.exports = {
+  authController,
   channelController,
   cityController,
   companyController,

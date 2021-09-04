@@ -1,5 +1,31 @@
 const { Op } = require('sequelize');
-const { Contact } = require('../models');
+const { Contact, City, Country, Region, ContactChannel, Company, Channel } = require('../models');
+
+const fullStateInclude = [
+  {
+    model: City,
+    attributes: ['name'],
+    include: {
+      model: Country,
+      attributes: ['name'],
+      include: {
+        model: Region,
+        attributes: ['name']
+      }
+    },
+  },
+  {
+    model: ContactChannel,
+    include: {
+      model: Channel,
+      attributes: ['name']
+    }
+  },
+  {
+    model: Company,
+    attributes: ['name']
+  }
+];
 
 exports.create = async (req, res) => {
   const {
@@ -18,10 +44,12 @@ exports.create = async (req, res) => {
 
 exports.readAll = async (req, res) => {
   const {
-    limit, offset, firstName, lastName, position, email, address, interest, companyId, cityId, 
+    fullState, limit, offset, firstName, lastName, position, email, address, interest, companyId, cityId, 
   } = req.query;
   const query = {};
   const where = {};
+
+  if (fullState == 'true') query.include = fullStateInclude;
 
   if (firstName) where.firstName = { [Op.like]: `%${firstName}%` };
   if (lastName) where.lastName = { [Op.like]: `%${lastName}%` };
@@ -46,18 +74,15 @@ exports.readAll = async (req, res) => {
 
 exports.readOne = async (req, res) => {
   const { contactId } = req.params;
-  const { fullState } = req.body;
+  const { fullState } = req.query;
   const query = {};
 
   query.where = { id: contactId };
+  
+  if (fullState == 'true') query.include = fullStateInclude;
 
   try {
-    let contact;
-    if (fullState) {
-      contact = await Contact.findOne(query);
-    } else {
-      contact = await Contact.findOne(query);
-    }
+    const contact = await Contact.findOne(query);
     
     if (contact) {
       res.send(contact);

@@ -8,14 +8,17 @@ const Region = require('./Region');
 const User = require('./User');
 
 Channel.belongsToMany(Contact, { through: ContactChannel });
+Channel.hasMany(ContactChannel);
 
 Company.belongsTo(City);
 
 Contact.belongsTo(City);
 Contact.belongsTo(Company);
 Contact.belongsToMany(Channel, { through: ContactChannel });
+Contact.hasMany(ContactChannel);
 
 ContactChannel.belongsTo(Contact, { onDelete: 'cascade', foreignKey: { allowNull: false } });
+ContactChannel.belongsTo(Channel, { foreignKey: { allowNull: false } });
 
 City.hasMany(Contact);
 City.belongsTo(Country, { onDelete: 'cascade', foreignKey: { allowNull: false } });

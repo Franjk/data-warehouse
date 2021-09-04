@@ -1,7 +1,7 @@
 const express = require('express');
 const { contactChannelController } = require('../controllers');
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 router.post('/', contactChannelController.create);
 

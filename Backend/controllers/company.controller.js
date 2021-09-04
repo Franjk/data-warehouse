@@ -1,5 +1,20 @@
 const { Op } = require('sequelize');
-const { Company } = require('../models');
+const { Company, City, Country, Region } = require('../models');
+
+const fullStateInclude = [
+  {
+    model: City,
+    attributes: ['name'],
+    include: {
+      model: Country,
+      attributes: ['name'],
+      include: {
+        model: Region,
+        attributes: ['name']
+      }
+    },
+  }
+];
 
 exports.create = async (req, res) => {
   const {
@@ -20,8 +35,11 @@ exports.readAll = async (req, res) => {
   const {
     limit, offset, name, address, email, phoneNumber, cityId,
   } = req.query;
+  const { fullState } = req.body;
   const query = {};
   const where = {};
+
+  if (fullState) query.include = fullStateInclude;
 
   if (name) where.name = { [Op.like]: `%${name}%` };
   if (phoneNumber) where.phoneNumber = { [Op.like]: `%${phoneNumber}%` };
@@ -43,7 +61,10 @@ exports.readAll = async (req, res) => {
 
 exports.readOne = async (req, res) => {
   const { companyId } = req.params;
+  const { fullState } = req.body;
   const query = {};
+
+  if (fullState) query.include = fullStateInclude;
 
   query.where = { id: companyId };
 

@@ -33,6 +33,7 @@ const Contact = sequelize.define('contact', {
     validate: {
       max: 100,
       min: 0,
+      isIn: [[0, 25, 50, 75, 100]]
     }
   },
 }, {

@@ -24,7 +24,7 @@ exports.readAll = async (req, res) => {
   } = req.query;
   const query = {};
   const where = {};
-
+  
   if (contactId) where.contactId = contactId;
   if (channelId) where.channelId = channelId;
   if (account) where.account = { [Op.like]: `%${account}%` };
