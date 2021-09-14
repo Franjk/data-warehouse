@@ -7,9 +7,15 @@
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link rel='stylesheet' type='text/css' media='screen' href='../styles/main.css'>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="../../node_modules/sweetalert2/dist/sweetalert2.css"> -->
+
+
 </head>
 <body>
 
+  <div id="modal-anchor">
+    <!-- Se inyecta el modal dinamicamente -->
+  </div>
 
   <div id="form-anchor">
     <!-- Se inyecta el form dinamicamente -->
@@ -34,7 +40,7 @@
         </form>
   
         <div class="input-group">
-          <button class="btn btn-primary">Agregar contactos</button>
+          <button id="add-button" class="btn btn-primary">Agregar contactos</button>
         </div>
   
       </div>
@@ -42,10 +48,16 @@
     </section>
 
     <section>
-      <div class="mb-4">
+      <div class="mb-4 flex justify-content-space-between">
         <span id="count-selected-tag" class="tag tag-light"></span>
+        <button id="bulk-delete-btn" class="btn btn-terciary">
+          <span class="material-icons">delete</span>
+          Eliminar contactos
+        </button>
       </div>
-      <div id="contacts-table-container"></div>
+      <div id="contacts-table-container">
+
+      </div>
 
       <div id="contact-table-footer" class="flex justify-content-space-between">
         <div class="flex text-gray">
@@ -69,6 +81,7 @@
     </section>
   </main>
 
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src='../src/contacts.js' type="module"></script>
   <script src="../src/styles.js"></script>
 </body>
