@@ -78,7 +78,7 @@ async function populate() {
     { contactId: 3, channelId: 2, account: '123456', preference: 'FAVORITE' },
     { contactId: 3, channelId: 4, account: '123456', preference: 'FAVORITE' },
     { contactId: 4, channelId: 5, account: '123456', preference: 'FAVORITE' },
-    { contactId: 4, channelId: 6, account: '123456', preference: 'FAVORITE' },
+    { contactId: 4, channelId: 1, account: '123456', preference: 'FAVORITE' },
     { contactId: 5, channelId: 3, account: '123456', preference: 'FAVORITE' },
     { contactId: 5, channelId: 5, account: '123456', preference: 'FAVORITE' },
   ]);
