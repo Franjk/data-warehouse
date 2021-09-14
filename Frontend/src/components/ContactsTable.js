@@ -193,6 +193,12 @@ class ContactsTable extends Component {
   get totalRows() {
     return this.state.data.length;
   }
+
+  get selectedRows() {
+    return this.children
+      .map(child => child.state)
+      .filter(child => child.selected);
+  }
 }
 
 export default ContactsTable;
