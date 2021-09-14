@@ -1,13 +1,12 @@
 import { Component } from '../libs/xQuery/xQuery.js';
 
-class DeleteConfirmationModal extends Component {
+class Toast extends Component {
   constructor(parentEl, props) {
     super(document.createElement('div'));
 
     this.state = {
       text: '¿Continuar?',
-      acceptCallback: () => {},
-      cancelCallback: () => {},
+      time: 1000,
       ...props,
     };
 
@@ -53,4 +52,4 @@ class DeleteConfirmationModal extends Component {
   }
 }
 
-export default DeleteConfirmationModal;
+export default Toast;
