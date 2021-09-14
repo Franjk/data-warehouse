@@ -18,7 +18,7 @@ export async function get(url, query) {
     const data = await res.json();
     return data;
   } catch(err) {
-    return err;
+    return {err};
   }
 }
 
@@ -36,28 +36,37 @@ export async function post(url, body) {
     const data = await res.json();
     return data;
   } catch (err) {
-    return err;
+    return {err};
   }
 }
 
 export async function put(url, body) {
   try {
     const objUrl = new URL(`${HOST}/${url}`);
-    const res = await fetch(objUrl, {method: 'PUT', body: JSON.stringify(body)});
+    const res = await fetch(objUrl, {
+      method: 'PUT', 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
     const data = await res.json();
     return data;
   } catch (err) {
-    return err;
+    return {err};
   }
 }
 
-export async function destroy(url) {
+export async function destroy(url, body = '') {
   try {
     const objUrl = new URL(`${HOST}/${url}`);
-    const res = await fetch(objUrl, {method: 'DELETE'});
+    console.log(JSON.stringify(body));
+    const res = await fetch(objUrl, {
+      method: 'DELETE', 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
     const data = await res.json();
     return data;
   } catch(err) {
-    return err;
+    return {err};
   }
 }
