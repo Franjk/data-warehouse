@@ -26,7 +26,8 @@
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.0",
-    "sequelize": "^6.6.5"
+    "sequelize": "^6.6.5",
+    "sweetalert2": "^11.1.5"
   },
   "proxy": "http://localhost:4000"
 }
