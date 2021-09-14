@@ -171,7 +171,7 @@ class ContactsForm extends Component {
 
     // const btnOrderName = this.$.querySelector('[data-select="btn-order-name"]');
     this.$.querySelector('form').addEventListener('submit', this.submitForm.bind(this));
-    this.$.querySelector('[data-select="close-btn"]').addEventListener('click', () => this.$.remove());
+    this.$.querySelector('[data-select="close-btn"]').addEventListener('click', this.close.bind(this));
 
     // btnOrderName.addEventListener('click', () => this.reorderTable('name'));
     this.state.$CompanySelect = this.$.querySelector('[data-select="company-select"]');
@@ -459,9 +459,9 @@ class ContactsForm extends Component {
   }
 
   close() {
-    console.log('close form');
-    this.hide();
+    this.$.remove();
   }
+
 
 
 }
