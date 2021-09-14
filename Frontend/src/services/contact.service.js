@@ -29,3 +29,10 @@ export async function deleteContact(id) {
   console.log('deleteContact', res);
   return res;
 }
+
+export async function bulkDeleteContact(idArr) {
+  console.log(idArr);
+  const res = await destroy('contacts', idArr);
+  console.log('bulkDelete', res);
+  return res;
+}
