@@ -3,12 +3,12 @@ const { User } = require('../models');
 
 exports.create = async (req, res) => {
   const {
-    username, password, fullName, email, phoneNumber, address, role,
+    username, password, firstName, lastName, email, phoneNumber, address, role,
   } = req.body;
 
   try {
     const newUser = await User.create({
-      username, password, fullName, email, phoneNumber, address, role,
+      username, password, firstName, lastName, email, phoneNumber, address, role,
     });
     res.status(201).send(newUser);
   } catch (err) {
@@ -18,13 +18,14 @@ exports.create = async (req, res) => {
 
 exports.readAll = async (req, res) => {
   const {
-    limit, offset, username, fullName, email, phoneNumber, address, role,
+    limit, offset, username, firstName, lastName, email, phoneNumber, address, role,
   } = req.query;
   const query = {};
   const where = {};
 
   if (username) where.username = { [Op.like]: `%${username}%` };
-  if (fullName) where.fullName = { [Op.like]: `%${fullName}%` };
+  if (firstName) where.firstName = { [Op.like]: `%${firstName}%` };
+  if (lastName) where.lastName = { [Op.like]: `%${lastName}%` };
   if (phoneNumber) where.phoneNumber = { [Op.like]: `%${phoneNumber}%` };
   if (email) where.email = { [Op.like]: `%${email}%` };
   if (address) where.address = { [Op.like]: `%${address}%` };
@@ -65,7 +66,7 @@ exports.readOne = async (req, res) => {
 exports.update = async (req, res) => {
   const { userId } = req.params;
   const {
-    username, fullName, email, phoneNumber, address, role, password,
+    username, firstName, lastName, email, phoneNumber, address, role, password,
   } = req.body;
   const query = {};
 
@@ -73,7 +74,7 @@ exports.update = async (req, res) => {
 
   try {
     const updateCount = await User.update({
-      username, fullName, email, phoneNumber, address, role, password,
+      username, firstName, lastName, email, phoneNumber, address, role, password,
     }, query);
 
     if (updateCount > 0) {

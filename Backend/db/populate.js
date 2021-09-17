@@ -84,11 +84,11 @@ async function populate() {
   ]);
 
   await User.bulkCreate([
-    { username: 'admin', password: '123', fullName: 'Administrador', email: 'admin@mail.com', role: 'ADMIN', address: 'ABC 123', phoneNumber: '3526 1236 2221' },
-    { username: 'analyst', password: '123', fullName: 'Analyst', email: 'analyst@mail.com', role: 'BASICO', address: 'ABC 456', phoneNumber: '3652 9998 3625' },
-    { username: 'frank', password: '123', fullName: 'Francis Kay', email: 'frank@mail.com', role: 'ADMIN', address: 'ABC 789', phoneNumber: '3695 3251 2153' },
-    { username: 'martinj', password: '123', fullName: 'Martin Jay', email: 'martinj@mail.com', role: 'BASICO', address: 'QWE 123', phoneNumber: '1234 1236 2221' },
-    { username: 'josephR', password: '123', fullName: 'Joseph Red', email: 'josephr@mail.com', role: 'BASICO', address: 'QWE 365', phoneNumber: '215 5461 1254' },
+    { username: 'admin', password: '123', firstName: 'Adminis', lastName: 'Trador', email: 'admin@mail.com', role: 'ADMIN', address: 'ABC 123', phoneNumber: '3526 1236 2221' },
+    { username: 'analyst', password: '123', firstName: 'Ana', lastName: 'Lista', email: 'analyst@mail.com', role: 'BASICO', address: 'ABC 456', phoneNumber: '3652 9998 3625' },
+    { username: 'frank', password: '123', firstName: 'Francis', lastName: 'Kay', email: 'frank@mail.com', role: 'ADMIN', address: 'ABC 789', phoneNumber: '3695 3251 2153' },
+    { username: 'martinj', password: '123', firstName: 'Martin', lastName: 'Jay', email: 'martinj@mail.com', role: 'BASICO', address: 'QWE 123', phoneNumber: '1234 1236 2221' },
+    { username: 'josephR', password: '123', firstName: 'Joseph', lastName: 'Red', email: 'josephr@mail.com', role: 'BASICO', address: 'QWE 365', phoneNumber: '215 5461 1254' },
   ]);
 
 }

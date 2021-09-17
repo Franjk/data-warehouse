@@ -8,7 +8,8 @@ class UsersTableRow extends Component {
       id: 0, 
       selected: false, 
       username: '', 
-      fullName: '', 
+      firstName: '', 
+      lastName: '', 
       email: '',
       phoneNumber: '',
       address: '',
@@ -21,7 +22,7 @@ class UsersTableRow extends Component {
 
   render() {
     const {
-      selected, username, fullName, email, phoneNumber, address, role,
+      selected, username, firstName, lastName, email, role,
     } = this.state;
 
     this.$.innerHTML = `
@@ -34,10 +35,9 @@ class UsersTableRow extends Component {
           />
       </td>
       <td>${username ?? ''}</td>
-      <td>${fullName ?? ''}</td>
+      <td>${firstName ?? ''}</td>
+      <td>${lastName ?? ''}</td>
       <td>${email ?? ''}</td>
-      <td>${phoneNumber ?? ''}</td>
-      <td>${address ?? ''}</td>
       <td>${role === 'ADMIN' ? 'Admin' : 'Básico'}</td>
 
       <td class="text-align-center p-0 flex justify-content-center">

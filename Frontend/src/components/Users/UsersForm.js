@@ -69,19 +69,13 @@ class CompaniesForm extends Component {
             <div class="form-row">
 
               <div class="input-label-group text-dark-gray">
-                <label class="label" for="fullName">Nombre completo</label>
-                <input class="input" type="text" name="fullName" id="fullName">
+                <label class="label" for="firstName">Nombre</label>
+                <input class="input" type="text" name="firstName" id="firstName">
               </div>
-
 
               <div class="input-label-group text-dark-gray">
-                <label class="label" for="phoneNumber">Teléfono</label>
-                <input class="input" type="text" name="phoneNumber" id="phoneNumber">
-              </div>
-
-              <div class="input-label-group">
-                <label class="label" for="address">Dirección</label>
-                <input class="input" type="text" name="address" id="address" placeholder="" data-select="address-input">
+                <label class="label" for="lastName">Apellido</label>
+                <input class="input" type="text" name="lastName" id="lastName">
               </div>
 
             </div>
@@ -103,12 +97,14 @@ class CompaniesForm extends Component {
     this.$.querySelector('[data-select="delete-btn"]')?.addEventListener('click', this.deleteRecord.bind(this));
 
     this.state.$UsernameInput = this.$.querySelector('#username');
-    this.state.$FullNameInput = this.$.querySelector('#fullName');
+    this.state.$FirstNameInput = this.$.querySelector('#firstName');
+    this.state.$LastNameInput = this.$.querySelector('#lastName');
+    // this.state.$FullNameInput = this.$.querySelector('#fullName');
     this.state.$EmailInput = this.$.querySelector('#email');
     this.state.$Password = this.$.querySelector('#password');
     this.state.$RepeatPassword = this.$.querySelector('#repeatPassword');
-    this.state.$PhoneNumberInput = this.$.querySelector('#phoneNumber');
-    this.state.$AddressInput = this.$.querySelector('[data-select="address-input"]');
+    // this.state.$PhoneNumberInput = this.$.querySelector('#phoneNumber');
+    // this.state.$AddressInput = this.$.querySelector('[data-select="address-input"]');
     this.state.$RoleSelect = this.$.querySelector('#role');
 
     if (this.state.mode === 'update') {
@@ -122,10 +118,12 @@ class CompaniesForm extends Component {
     console.log('loadUser', this.state.id, res);
 
     this.state.$UsernameInput.value = res.username ?? '';
-    this.state.$FullNameInput.value = res.fullName ?? '';
+    // this.state.$FullNameInput.value = res.fullName ?? '';
+    this.state.$FirstNameInput.value = res.firstName ?? '';
+    this.state.$LastNameInput.value = res.lastName ?? '';
     this.state.$EmailInput.value = res.email ?? '';
-    this.state.$PhoneNumberInput.value = res.phoneNumber ?? '';
-    this.state.$AddressInput.value = res.address ?? '';
+    // this.state.$PhoneNumberInput.value = res.phoneNumber ?? '';
+    // this.state.$AddressInput.value = res.address ?? '';
     this.state.$RoleSelect.value = res.role ?? '';
   }
 
@@ -140,9 +138,12 @@ class CompaniesForm extends Component {
     if (this.state.$Password.value) data.password = this.state.$Password.value;
     if (this.state.$EmailInput.value) data.email = this.state.$EmailInput.value;
     if (this.state.$RoleSelect.value) data.role = this.state.$RoleSelect.value;
-    if (this.state.$FullNameInput.value) data.fullName = this.state.$FullNameInput.value;
-    if (this.state.$PhoneNumberInput.value) data.phoneNumber = this.state.$PhoneNumberInput.value;
-    if (this.state.$AddressInput.value) data.address = this.state.$AddressInput.value;
+    if (this.state.$FirstNameInput.value) data.firstName = this.state.$FirstNameInput.value;
+    if (this.state.$LastNameInput.value) data.lastName = this.state.$LastNameInput.value;
+
+    // if (this.state.$FullNameInput.value) data.fullName = this.state.$FullNameInput.value;
+    // if (this.state.$PhoneNumberInput.value) data.phoneNumber = this.state.$PhoneNumberInput.value;
+    // if (this.state.$AddressInput.value) data.address = this.state.$AddressInput.value;
 
     if (this.state.mode === 'create') {
       document.dispatchEvent(new CustomEvent('create-user', {detail: {data}}));

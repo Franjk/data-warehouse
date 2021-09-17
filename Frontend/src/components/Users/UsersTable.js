@@ -37,8 +37,15 @@ class UsersTable extends Component {
             
             <th>
               <span>
-                Nombre completo 
-                <span class="material-icons action-icon" data-select="btn-order-fullName">swap_vert</span>
+                Nombre 
+                <span class="material-icons action-icon" data-select="btn-order-firstName">swap_vert</span>
+              </span>
+            </th>
+
+            <th>
+              <span>
+                Apellido 
+                <span class="material-icons action-icon" data-select="btn-order-lastName">swap_vert</span>
               </span>
             </th>
 
@@ -51,20 +58,7 @@ class UsersTable extends Component {
 
             <th>
               <span>
-                Teléfono 
-                <span class="material-icons action-icon" data-select="btn-order-phoneNumber">swap_vert</span>
-              </span>
-            </th>
-
-            <th>
-              <span>
-                Dirección
-                <span class="material-icons action-icon" data-select="btn-order-address">swap_vert</span>
-              </span>
-            </th>
-            <th>
-              <span>
-                Rol
+                Perfil
                 <span class="material-icons action-icon" data-select="btn-order-role">swap_vert</span>
               </span>
             </th>
@@ -119,17 +113,21 @@ class UsersTable extends Component {
       });
 
     const btnOrderUsername = this.$.querySelector('[data-select="btn-order-username"]');
-    const btnOrderFullName = this.$.querySelector('[data-select="btn-order-fullName"]');
+    // const btnOrderFullName = this.$.querySelector('[data-select="btn-order-fullName"]');
+    const btnOrderFirstName = this.$.querySelector('[data-select="btn-order-firstName"]');
+    const btnOrderLastName = this.$.querySelector('[data-select="btn-order-lastName"]');
     const btnOrderEmail = this.$.querySelector('[data-select="btn-order-email"]');
-    const btnOrderPhoneNumber = this.$.querySelector('[data-select="btn-order-phoneNumber"]');
-    const btnOrderAddress = this.$.querySelector('[data-select="btn-order-address"]');
+    // const btnOrderPhoneNumber = this.$.querySelector('[data-select="btn-order-phoneNumber"]');
+    // const btnOrderAddress = this.$.querySelector('[data-select="btn-order-address"]');
     const btnOrderRole = this.$.querySelector('[data-select="btn-order-role"]');
 
     btnOrderUsername.addEventListener('click', () => this.reorderTable('username'));
-    btnOrderFullName.addEventListener('click', () => this.reorderTable('fullName'));
+    // btnOrderFullName.addEventListener('click', () => this.reorderTable('fullName'));
+    btnOrderFirstName.addEventListener('click', () => this.reorderTable('firstName'));
+    btnOrderLastName.addEventListener('click', () => this.reorderTable('lastName'));
     btnOrderEmail.addEventListener('click', () => this.reorderTable('email'));
-    btnOrderPhoneNumber.addEventListener('click', () => this.reorderTable('phoneNumber'));
-    btnOrderAddress.addEventListener('click', () => this.reorderTable('address'));
+    // btnOrderPhoneNumber.addEventListener('click', () => this.reorderTable('phoneNumber'));
+    // btnOrderAddress.addEventListener('click', () => this.reorderTable('address'));
     btnOrderRole.addEventListener('click', () => this.reorderTable('role'));
 
     document.dispatchEvent(new CustomEvent('update-count-selected-tag'));
