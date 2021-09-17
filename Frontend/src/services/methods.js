@@ -59,11 +59,17 @@ export async function destroy(url, body = '') {
   try {
     const objUrl = new URL(`${HOST}/${url}`);
     console.log(JSON.stringify(body));
-    const res = await fetch(objUrl, {
-      method: 'DELETE', 
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
+
+    let res;
+    if (body) {
+      res = await fetch(objUrl, {
+        method: 'DELETE', 
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+    } else {
+      res = await fetch(objUrl, {method: 'DELETE'});
+    }
     const data = await res.json();
     return data;
   } catch(err) {

@@ -1,8 +1,9 @@
 import { Component } from '../libs/xQuery/xQuery.js';
-import { getRegions } from '../services/region.service.js';
-import { getCountries } from '../services/country.service.js';
 import { getCities } from '../services/city.service.js';
+import { getContact } from '../services/contact.service.js';
 import { getCompanies } from '../services/company.service.js';
+import { getCountries } from '../services/country.service.js';
+import { getRegions } from '../services/region.service.js';
 
 class ContactsForm extends Component {
   constructor(parentEl, props) {
@@ -160,7 +161,7 @@ class ContactsForm extends Component {
             
           </div>
           <div class="form-footer">
-            <button class="btn btn-danger-outline">Eliminar contacto</button>
+          ${this.state.mode === 'update' ? '<button class="btn btn-danger-outline" data-select="delete-btn">Eliminar contacto</button>' : ''}
             <button class="btn btn-success" data-select="save-btn">Guardar contacto</button>
           </div>
 
@@ -170,7 +171,9 @@ class ContactsForm extends Component {
     `;
 
     // const btnOrderName = this.$.querySelector('[data-select="btn-order-name"]');
-    this.$.querySelector('form').addEventListener('submit', this.submitForm.bind(this));
+    this.$.querySelector('form').addEventListener('submit', (e) => e.preventDefault());
+    this.$.querySelector('[data-select="save-btn"]').addEventListener('click', this.submitForm.bind(this));
+    this.$.querySelector('[data-select="delete-btn"]')?.addEventListener('click', this.deleteRecord.bind(this));
     this.$.querySelector('[data-select="close-btn"]').addEventListener('click', this.close.bind(this));
 
     // btnOrderName.addEventListener('click', () => this.reorderTable('name'));
@@ -201,11 +204,65 @@ class ContactsForm extends Component {
     this.state.$RegionSelect.addEventListener('change', this.selectRegionChangeHandler.bind(this));
     this.state.$CountrySelect.addEventListener('change', this.selectCountryChangeHandler.bind(this));
     this.state.$CitySelect.addEventListener('change', this.selectCityChangeHandler.bind(this));
-    // this.state.$SaveBtn.addEventListener('click', this.saveBtnClickHandler.bind(this));
+    
 
-    this.loadRegions();
-    this.loadCompanies();
+   
 
+    if (this.state.mode === 'update') {
+      this.loadContact();
+    } else {
+      this.loadRegions();
+      this.loadCompanies();
+    }
+
+  }
+
+  async loadContact() {
+    const res = await getContact(this.state.contactId, {fullState: true});
+    console.log('loadContacts', this.state.contactId, res);
+
+    this.state.$FirstNameInput.value = res.firstName ?? '';
+    this.state.$LastNameInput.value = res.lastName ?? '';
+    this.state.$EmailInput.value = res.email ?? '';
+    this.state.$PositionInput.value = res.position ?? '';
+    this.state.$InterestSelect.value = res.interest ?? 0;
+    
+    
+    this.state.$AddressInput.value = res.address ?? '';
+    if (res.address) {
+      this.state.$AddressInput.disabled = false;
+    }
+
+    await this.loadCompanies();
+    this.state.$CompanySelect.value = res.companyId ?? 0;
+
+    await this.loadRegions();
+    const regionId = res.city?.country?.region?.id ?? 0;
+    if (regionId) {
+      this.state.$RegionSelect.value = regionId;
+      await this.loadCountries(regionId);
+      
+    }
+
+    const countryId = res.city?.country?.id ?? 0;
+    if (countryId) {
+      this.state.$CountrySelect.value = res.city?.country?.id ?? 0;
+      await this.loadCities(countryId);
+      this.state.$CountrySelect.disabled = false;
+    }
+
+    const cityId = res.cityId ?? 0;
+    if (cityId) {
+      this.state.$CitySelect.value = cityId;
+      this.state.$CitySelect.disabled = false;
+    }
+
+    if (res.contactChannels) {
+      for (let channel of res.contactChannels) {
+        this.state[`$ChannelAccount${channel.channelId}`].value = channel.account ?? '';
+        this.state[`$ChannelPreference${channel.channelId}`].value = channel.preference ?? 'NO_PREFERENCE';
+      }
+    }
   }
 
   async loadCompanies() {
@@ -360,9 +417,9 @@ class ContactsForm extends Component {
     if (this.state.$AddressInput.value) data.address = this.state.$AddressInput.value;
     if (this.state.$InterestSelect.value) data.interest = this.state.$InterestSelect.value;
 
-    const channels = [];
+    const contactChannels = [];
     if (this.state.$ChannelAccount1.value) {
-      channels.push({
+      contactChannels.push({
         channelId: 1,
         account: this.state.$ChannelAccount1.value,
         preference: this.state.$ChannelPreference1.value,
@@ -370,7 +427,7 @@ class ContactsForm extends Component {
     }
 
     if (this.state.$ChannelAccount2.value) {
-      channels.push({
+      contactChannels.push({
         channelId: 2,
         account: this.state.$ChannelAccount2.value,
         preference: this.state.$ChannelPreference2.value,
@@ -378,7 +435,7 @@ class ContactsForm extends Component {
     }
 
     if (this.state.$ChannelAccount3.value) {
-      channels.push({
+      contactChannels.push({
         channelId: 3,
         account: this.state.$ChannelAccount3.value,
         preference: this.state.$ChannelPreference3.value,
@@ -386,7 +443,7 @@ class ContactsForm extends Component {
     }
 
     if (this.state.$ChannelAccount4.value) {
-      channels.push({
+      contactChannels.push({
         channelId: 4,
         account: this.state.$ChannelAccount4.value,
         preference: this.state.$ChannelPreference4.value,
@@ -394,23 +451,31 @@ class ContactsForm extends Component {
     }
 
     if (this.state.$ChannelAccount5.value) {
-      channels.push({
+      contactChannels.push({
         channelId: 5,
         account: this.state.$ChannelAccount5.value,
         preference: this.state.$ChannelPreference5.value,
       });
     }
 
-    data.channels = channels;
+    data.contactChannels = contactChannels;
 
     if (this.state.mode === 'create') {
       document.dispatchEvent(new CustomEvent('create-contact', {detail: {data}}));
     } else if (this.state.mode === 'update') {
+      data.id = this.state.contactId;
       document.dispatchEvent(new CustomEvent('update-contact', {detail: {data}}));
     }
 
     console.log('save', data);
 
+  }
+
+  deleteRecord(e) {
+    e.preventDefault();
+    if (this.state.contactId) {
+      document.dispatchEvent(new CustomEvent('delete-contact', {detail: {id: this.state.contactId}}));
+    }
   }
 
   validateInputs() {

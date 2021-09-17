@@ -1,7 +1,7 @@
-import { Component } from '../libs/xQuery/xQuery.js';
-import ContactsTableRow from './ContactsTableRow.js';
+import { Component } from '../../libs/xQuery/xQuery.js';
+import CompaniesTableRow from './CompaniesTableRow.js';
 
-class ContactsTable extends Component {
+class CompaniesTable extends Component {
   constructor(parentEl, props) {
     super(document.createElement('table'));
     this.addClass('table');
@@ -25,49 +25,57 @@ class ContactsTable extends Component {
         <thead>
           <tr >
             <th>
-              <input type="checkbox" name="" id="contact-table-chk" class="master-chk">
+              <input type="checkbox" name="" id="table-chk" class="master-chk">
             </th>
             <th style="width:200px;">
               <span>
-                Contacto 
+                Nombre 
                 <span class="material-icons action-icon" data-select="btn-order-name">swap_vert</span>
               </span>
             </th>
+
+            <th>
+              <span>
+                Email 
+                <span class="material-icons action-icon" data-select="btn-order-email">swap_vert</span>
+              </span>
+            </th>
+
+            <th>
+              <span>
+                Teléfono 
+                <span class="material-icons action-icon" data-select="btn-order-phoneNumber">swap_vert</span>
+              </span>
+            </th>
+
+            <th style="width:200px;">
+              <span>
+                Dirección
+                <span class="material-icons action-icon" data-select="btn-order-address">swap_vert</span>
+              </span>
+            </th>
+            <th>
+              <span>
+                Ciudad
+                <span class="material-icons action-icon" data-select="btn-order-city">swap_vert</span>
+              </span>
+            </th>
+
             <th>
               <span>
                 País/Región
                 <span class="material-icons action-icon" data-select="btn-order-country">swap_vert</span>
               </span>
             </th>
-            <th>
-              <span>
-                Compañía
-                <span class="material-icons action-icon" data-select="btn-order-company">swap_vert</span>
-              </span>
-            </th>
-            <th>
-              <span>
-                Cargo
-                <span class="material-icons action-icon" data-select="btn-order-position">swap_vert</span>
-              </span>
-            </th>
-
-
 
             <th>
-              <span>
-                Interés
-                <span class="material-icons action-icon" data-select="btn-order-interest">swap_vert</span>
-              </span>
-            </th>
-            <th >
               <span class="justify-content-center">
                 Acciones
                 </span>
             </th>
           </tr>
         </thead>
-        <tbody id="tbody-contactos" data-anchor="contacts-table-body">
+        <tbody id="tbody" data-anchor="table-body">
           <!-- Aqui se inyectan cada una de las filas de la tabla -->
         </tbody>
       </table>
@@ -102,24 +110,22 @@ class ContactsTable extends Component {
       )
       .forEach(cd => {
         this.children.push(
-          new ContactsTableRow(
-            this.$.querySelector('[data-anchor="contacts-table-body"]'), 
+          new CompaniesTableRow(
+            this.$.querySelector('[data-anchor="table-body"]'), 
             {...cd}
           )
         );
       });
 
     const btnOrderName = this.$.querySelector('[data-select="btn-order-name"]');
+    const btnOrderAddress = this.$.querySelector('[data-select="btn-order-address"]');
+    const btnOrderCity = this.$.querySelector('[data-select="btn-order-city"]');
     const btnOrderCountry = this.$.querySelector('[data-select="btn-order-country"]');
-    const btnOrderCompany = this.$.querySelector('[data-select="btn-order-company"]');
-    const btnOrderPosition = this.$.querySelector('[data-select="btn-order-position"]');
-    const btnOrderInterest = this.$.querySelector('[data-select="btn-order-interest"]');
 
     btnOrderName.addEventListener('click', () => this.reorderTable('name'));
+    btnOrderAddress.addEventListener('click', () => this.reorderTable('address'));
+    btnOrderCity.addEventListener('click', () => this.reorderTable('city'));
     btnOrderCountry.addEventListener('click', () => this.reorderTable('country'));
-    btnOrderCompany.addEventListener('click', () => this.reorderTable('company'));
-    btnOrderPosition.addEventListener('click', () => this.reorderTable('position'));
-    btnOrderInterest.addEventListener('click', () => this.reorderTable('interest'));
 
     document.dispatchEvent(new CustomEvent('update-count-selected-tag'));
     document.dispatchEvent(new CustomEvent('update-current-rows', { detail: { startRow: this.startRow, endRow: this.endRow }}));
@@ -199,14 +205,4 @@ class ContactsTable extends Component {
   }
 }
 
-export default ContactsTable;
-
-
-/*
-COLUMNA DE CANAL PREFERRIDO
-<th style="min-width:80px;">
-  <span>
-    Canal preferido
-  </span>
-</th>
-*/
+export default CompaniesTable;

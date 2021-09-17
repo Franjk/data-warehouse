@@ -4,13 +4,10 @@ const { Company, City, Country, Region } = require('../models');
 const fullStateInclude = [
   {
     model: City,
-    attributes: ['name'],
     include: {
       model: Country,
-      attributes: ['name'],
       include: {
         model: Region,
-        attributes: ['name']
       }
     },
   }
@@ -33,9 +30,8 @@ exports.create = async (req, res) => {
 
 exports.readAll = async (req, res) => {
   const {
-    limit, offset, name, address, email, phoneNumber, cityId,
+    fullState, limit, offset, name, address, email, phoneNumber, cityId,
   } = req.query;
-  const { fullState } = req.body;
   const query = {};
   const where = {};
 
@@ -61,7 +57,7 @@ exports.readAll = async (req, res) => {
 
 exports.readOne = async (req, res) => {
   const { companyId } = req.params;
-  const { fullState } = req.body;
+  const { fullState } = req.query;
   const query = {};
 
   if (fullState) query.include = fullStateInclude;
@@ -109,6 +105,26 @@ exports.delete = async (req, res) => {
   const query = {};
 
   query.where = { id: companyId };
+
+  try {
+    const deletedCount = await Company.destroy(query);
+    if (deletedCount > 0) {
+      res.send({ msg: `${deletedCount} deleted` });
+    } else {
+      res.send({ err: 'Not found' });
+    }
+  } catch (err) {
+    res.status(400).send({ err });
+  }
+};
+
+exports.bulkDelete = async (req, res) => {
+  const { companies } = req.body;
+  const query = {};
+
+  console.log('companies', companies);
+
+  query.where = { id: companies };
 
   try {
     const deletedCount = await Company.destroy(query);

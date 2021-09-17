@@ -7,6 +7,8 @@ router.post('/', companyController.create);
 
 router.get('/', companyController.readAll);
 
+router.delete('/', companyController.bulkDelete);
+
 router.get('/:companyId', companyController.readOne);
 
 router.put('/:companyId', companyController.update);

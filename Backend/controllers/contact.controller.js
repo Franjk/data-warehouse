@@ -5,13 +5,10 @@ const { Contact, City, Country, Region, ContactChannel, Company, Channel } = req
 const fullStateInclude = [
   {
     model: City,
-    attributes: ['name'],
     include: {
       model: Country,
-      attributes: ['name'],
       include: {
-        model: Region,
-        attributes: ['name']
+        model: Region
       }
     },
   },
@@ -19,18 +16,16 @@ const fullStateInclude = [
     model: ContactChannel,
     include: {
       model: Channel,
-      attributes: ['name']
     }
   },
   {
     model: Company,
-    attributes: ['name']
   }
 ];
 
 exports.create = async (req, res) => {
   const {
-    firstName, lastName, position, email, address, interest, companyId, cityId, channels
+    firstName, lastName, position, email, address, interest, companyId, cityId, contactChannels
   } = req.body;
 
   const t = await sequelize.transaction();
@@ -40,9 +35,9 @@ exports.create = async (req, res) => {
       firstName, lastName, position, email, address, interest, companyId, cityId, 
     }, { transaction: t });
 
-    if (channels && channels.length > 0) {
+    if (contactChannels && contactChannels.length > 0) {
 
-      const channelsWithContactId = channels.map(c => {
+      const channelsWithContactId = contactChannels.map(c => {
         return {
           ...c,
           contactId: newContact.id,
@@ -51,7 +46,7 @@ exports.create = async (req, res) => {
   
       const newContactChannels = await ContactChannel.bulkCreate(channelsWithContactId, {validate: true, transaction: t});
   
-      newContact.setDataValue('channels', newContactChannels);
+      newContact.setDataValue('contactChannels', newContactChannels);
     }
 
 
@@ -119,7 +114,7 @@ exports.readOne = async (req, res) => {
 exports.update = async (req, res) => {
   const { contactId } = req.params;
   const {
-    firstName, lastName, position, email, address, interest, companyId, cityId, channels
+    firstName, lastName, position, email, address, interest, companyId, cityId, contactChannels
   } = req.body;
   const query = {};
   const t = await sequelize.transaction();
@@ -135,19 +130,15 @@ exports.update = async (req, res) => {
       firstName, lastName, position, email, address, interest, companyId, cityId, updatedAt
     }, query);
 
-    console.log('updatedCount', updateCount, );
-  
 
-
-    console.log('channels', channels);
-    if (channels) {
+    if (contactChannels) {
       const deletedCount = await ContactChannel.destroy({where: {contactId}}, {transaction: t});
 
       console.log('deleteCound', deletedCount);
       if (deletedCount > 0) updateCount += 1;
 
-      if (channels.length > 0) {
-        const channelsWithContactId = channels.map(c => {
+      if (contactChannels.length > 0) {
+        const channelsWithContactId = contactChannels.map(c => {
           return {
             ...c,
             contactId: contactId,

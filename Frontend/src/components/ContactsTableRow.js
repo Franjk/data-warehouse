@@ -86,11 +86,7 @@ class ContactsTableRow extends Component {
       </td>
       <td>${company}</td>
       <td>${position}</td>
-      <td>
-        <div class="flex align-items-center gap-4">
-          ${displayedChannels.map(c => (`<span class="tag tag-light">${c}</span>`)).join(' ')}
-        </div>
-      </td>
+
       <td>
         <span class="flex align-items-center gap-4">
           <span>${interestPercentage}</span>
@@ -172,3 +168,14 @@ export default ContactsTableRow;
 //     )).join(' ')}
 //   </div>
 // </div>
+
+/**
+
+      <td>
+        <div class="flex align-items-center gap-4">
+          ${displayedChannels.map(c => (`<span class="tag tag-light">${c}</span>`)).join(' ')}
+        </div>
+      </td>
+
+      
+ */

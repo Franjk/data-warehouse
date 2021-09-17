@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import { ContactsForm, ContactsTable, Navbar, DeleteConfirmationModal } from './components/index.js';
 import { $ } from './libs/xQuery/xQuery.js';
-import { getContacts, deleteContact, createContact, bulkDeleteContact } from './services/contact.service.js';
+import { getContacts, deleteContact, createContact, bulkDeleteContact, updateContact } from './services/contact.service.js';
 
 const $CountSelectedTag = $('#count-selected-tag');
 const $RowsPerPageSelector = $('#rows-per-page-selector');
@@ -101,6 +101,8 @@ async function deleteContactEventHandler(e) {
 
       const newData = $ContactsTable.state.data.filter(el => el.id !== contactId);
       $ContactsTable.setState({data: newData});
+      $ContactsForm?.close();
+
       Swal.fire({icon: 'success', title: 'Contacto eliminado exitosamente'});
     },
     cancelCallback: () => console.log('cancelled')
@@ -109,6 +111,9 @@ async function deleteContactEventHandler(e) {
 
 async function editContactEventHandler(e) {
   const contactId = e.detail.id;
+  $ContactsForm = new ContactsForm($FormAnchor, {contactId});
+  $ContactsForm.unHide();
+
   return contactId;
 }
 
@@ -133,15 +138,31 @@ function updateCurrentRowsEventHandler(e) {
 
 async function createContactEventHandler(e) {
   const data = e.detail.data;
-  console.log(e);
   console.log('createContactEvent', data);
   const res = await createContact(data);
-  if (res.err) {
-    console.warn('Error', res.err);
-    Swal.fire({icon: 'error', title: 'Error al crear contacto'});
-  } else {
+
+  if (!res.err) {
+    loadContacts();
     await Swal.fire({icon: 'success', title: 'Contacto creado exitosamente'});
     $ContactsForm.close();
+  } else {
+    console.warn('Error', res.err);
+    Swal.fire({icon: 'error', title: 'Error al crear contacto'});
+  }
+}
+
+async function updateContactEventHandler(e) {
+  const data = e.detail.data;
+  console.log('updateContactEventHandler', data);
+  const res = await updateContact(data.id, data);
+
+  if (!res.err) {
+    loadContacts();
+    await Swal.fire({icon: 'success', title: 'Contacto editado exitosamente'});
+    $ContactsForm.close();
+  } else {
+    console.warn('Error', res.err);
+    Swal.fire({icon: 'error', title: 'Error al editar contacto'});
   }
 }
 
@@ -184,6 +205,7 @@ function initialize() {
   document.addEventListener('update-current-rows', updateCurrentRowsEventHandler);
   document.addEventListener('update-total-rows', updateTotalRowsEventHandler);
   document.addEventListener('create-contact', createContactEventHandler);
+  document.addEventListener('update-contact', updateContactEventHandler);
   
   $FilterForm.addEventListener('submit', handleFilterFormSubmit);
   $RowsPerPageSelector.addEventListener('change', (e) => updateRowsPerPage(e.target.value));
