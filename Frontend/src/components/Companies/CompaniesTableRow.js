@@ -34,15 +34,15 @@ class CompaniesTableRow extends Component {
           ${selected ? 'checked' : ''}
           />
       </td>
-      <td>${name}</td>
-      <td>${email}</td>
-      <td>${phoneNumber}</td>
-      <td>${address}</td>
-      <td>${city}</td>
+      <td>${name ?? ''}</td>
+      <td>${email ?? ''}</td>
+      <td>${phoneNumber ?? ''}</td>
+      <td>${address ?? ''}</td>
+      <td>${city ?? ''}</td>
       <td>
         <div class="flex-col gap-4">
-          <span>${country}</span>
-          <span class="text-gray">${region}</span>
+          <span>${country ?? ''}</span>
+          <span class="text-gray">${region ?? ''}</span>
         </div>
       </td>
 

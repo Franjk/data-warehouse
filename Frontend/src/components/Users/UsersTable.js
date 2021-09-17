@@ -1,7 +1,8 @@
 import { Component } from '../../libs/xQuery/xQuery.js';
-import CompaniesTableRow from './CompaniesTableRow.js';
+import UsersTableRow from './UsersTableRow.js';
 
-class CompaniesTable extends Component {
+
+class UsersTable extends Component {
   constructor(parentEl, props) {
     super(document.createElement('table'));
     this.addClass('table');
@@ -9,7 +10,7 @@ class CompaniesTable extends Component {
       rowsPerPage: 10,
       page: 1,
       data: [],
-      orderBy: { field: 'name', direction: 'asc' },
+      orderBy: { field: 'username', direction: 'asc' },
       filter: '',
       ...props,
     };
@@ -27,10 +28,17 @@ class CompaniesTable extends Component {
             <th>
               <input type="checkbox" name="" id="table-chk" class="master-chk">
             </th>
-            <th style="width:200px;">
+            <th>
               <span>
-                Nombre 
-                <span class="material-icons action-icon" data-select="btn-order-name">swap_vert</span>
+                Username 
+                <span class="material-icons action-icon" data-select="btn-order-username">swap_vert</span>
+              </span>
+            </th>
+            
+            <th>
+              <span>
+                Nombre completo 
+                <span class="material-icons action-icon" data-select="btn-order-fullName">swap_vert</span>
               </span>
             </th>
 
@@ -48,7 +56,7 @@ class CompaniesTable extends Component {
               </span>
             </th>
 
-            <th style="width:200px;">
+            <th>
               <span>
                 Dirección
                 <span class="material-icons action-icon" data-select="btn-order-address">swap_vert</span>
@@ -56,15 +64,8 @@ class CompaniesTable extends Component {
             </th>
             <th>
               <span>
-                Ciudad
-                <span class="material-icons action-icon" data-select="btn-order-city">swap_vert</span>
-              </span>
-            </th>
-
-            <th>
-              <span>
-                País/Región
-                <span class="material-icons action-icon" data-select="btn-order-country">swap_vert</span>
+                Rol
+                <span class="material-icons action-icon" data-select="btn-order-role">swap_vert</span>
               </span>
             </th>
 
@@ -110,22 +111,26 @@ class CompaniesTable extends Component {
       )
       .forEach(cd => {
         this.children.push(
-          new CompaniesTableRow(
+          new UsersTableRow(
             this.$.querySelector('[data-anchor="table-body"]'), 
             {...cd}
           )
         );
       });
 
-    const btnOrderName = this.$.querySelector('[data-select="btn-order-name"]');
+    const btnOrderUsername = this.$.querySelector('[data-select="btn-order-username"]');
+    const btnOrderFullName = this.$.querySelector('[data-select="btn-order-fullName"]');
+    const btnOrderEmail = this.$.querySelector('[data-select="btn-order-email"]');
+    const btnOrderPhoneNumber = this.$.querySelector('[data-select="btn-order-phoneNumber"]');
     const btnOrderAddress = this.$.querySelector('[data-select="btn-order-address"]');
-    const btnOrderCity = this.$.querySelector('[data-select="btn-order-city"]');
-    const btnOrderCountry = this.$.querySelector('[data-select="btn-order-country"]');
+    const btnOrderRole = this.$.querySelector('[data-select="btn-order-role"]');
 
-    btnOrderName.addEventListener('click', () => this.reorderTable('name'));
+    btnOrderUsername.addEventListener('click', () => this.reorderTable('username'));
+    btnOrderFullName.addEventListener('click', () => this.reorderTable('fullName'));
+    btnOrderEmail.addEventListener('click', () => this.reorderTable('email'));
+    btnOrderPhoneNumber.addEventListener('click', () => this.reorderTable('phoneNumber'));
     btnOrderAddress.addEventListener('click', () => this.reorderTable('address'));
-    btnOrderCity.addEventListener('click', () => this.reorderTable('city'));
-    btnOrderCountry.addEventListener('click', () => this.reorderTable('country'));
+    btnOrderRole.addEventListener('click', () => this.reorderTable('role'));
 
     document.dispatchEvent(new CustomEvent('update-count-selected-tag'));
     document.dispatchEvent(new CustomEvent('update-current-rows', { detail: { startRow: this.startRow, endRow: this.endRow }}));
@@ -205,4 +210,4 @@ class CompaniesTable extends Component {
   }
 }
 
-export default CompaniesTable;
+export default UsersTable;

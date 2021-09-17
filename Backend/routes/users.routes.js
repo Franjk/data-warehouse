@@ -7,6 +7,8 @@ router.post('/', userController.create);
 
 router.get('/', userController.readAll);
 
+router.delete('/', userController.bulkDelete);
+
 router.get('/:userId', userController.readOne);
 
 router.put('/:userId', userController.update);

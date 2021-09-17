@@ -154,13 +154,6 @@ class CompaniesForm extends Component {
       this.state.$CitySelect.value = cityId;
       this.state.$CitySelect.disabled = false;
     }
-
-    if (res.contactChannels) {
-      for (let channel of res.contactChannels) {
-        this.state[`$ChannelAccount${channel.channelId}`].value = channel.account ?? '';
-        this.state[`$ChannelPreference${channel.channelId}`].value = channel.preference ?? 'NO_PREFERENCE';
-      }
-    }
   }
 
   async loadRegions() {

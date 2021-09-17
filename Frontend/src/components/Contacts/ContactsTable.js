@@ -1,4 +1,4 @@
-import { Component } from '../libs/xQuery/xQuery.js';
+import { Component } from '../../libs/xQuery/xQuery.js';
 import ContactsTableRow from './ContactsTableRow.js';
 
 class ContactsTable extends Component {

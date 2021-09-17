@@ -65,7 +65,7 @@ exports.readOne = async (req, res) => {
 exports.update = async (req, res) => {
   const { userId } = req.params;
   const {
-    username, fullName, email, phoneNumber, address, role,
+    username, fullName, email, phoneNumber, address, role, password,
   } = req.body;
   const query = {};
 
@@ -73,7 +73,7 @@ exports.update = async (req, res) => {
 
   try {
     const updateCount = await User.update({
-      username, fullName, email, phoneNumber, address, role,
+      username, fullName, email, phoneNumber, address, role, password,
     }, query);
 
     if (updateCount > 0) {
@@ -103,3 +103,24 @@ exports.delete = async (req, res) => {
     res.status(400).send({ err });
   }
 };
+
+exports.bulkDelete = async (req, res) => {
+  const { users } = req.body;
+  const query = {};
+
+  console.log('users', users);
+
+  query.where = { id: users };
+
+  try {
+    const deletedCount = await User.destroy(query);
+    if (deletedCount > 0) {
+      res.send({ msg: `${deletedCount} deleted` });
+    } else {
+      res.send({ err: 'Not found' });
+    }
+  } catch (err) {
+    res.status(400).send({ err });
+  }
+};
+

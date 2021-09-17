@@ -29,15 +29,15 @@ const User = sequelize.define('user', {
   },
   address: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   role: {
     type: DataTypes.STRING(10),
     validate: {
-      isIn: [['ANALYST', 'SYSADMIN']],
+      isIn: [['ADMIN', 'BASICO']],
     },
     allowNull: false,
-    defaultValue: 'ANALYST',
+    defaultValue: 'BASICO',
   },
 }, {
   sequelize,

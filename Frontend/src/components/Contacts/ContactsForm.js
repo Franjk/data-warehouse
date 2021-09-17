@@ -1,9 +1,9 @@
-import { Component } from '../libs/xQuery/xQuery.js';
-import { getCities } from '../services/city.service.js';
-import { getContact } from '../services/contact.service.js';
-import { getCompanies } from '../services/company.service.js';
-import { getCountries } from '../services/country.service.js';
-import { getRegions } from '../services/region.service.js';
+import { Component } from '../../libs/xQuery/xQuery.js';
+import { getCities } from '../../services/city.service.js';
+import { getContact } from '../../services/contact.service.js';
+import { getCompanies } from '../../services/company.service.js';
+import { getCountries } from '../../services/country.service.js';
+import { getRegions } from '../../services/region.service.js';
 
 class ContactsForm extends Component {
   constructor(parentEl, props) {

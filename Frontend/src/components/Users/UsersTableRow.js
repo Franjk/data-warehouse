@@ -1,19 +1,18 @@
 import { Component } from '../../libs/xQuery/xQuery.js';
 
-class CompaniesTableRow extends Component {
+class UsersTableRow extends Component {
   constructor(parentEl, props) {
     super(document.createElement('tr'));
 
     this.state = { 
       id: 0, 
       selected: false, 
-      name: '', 
+      username: '', 
+      fullName: '', 
       email: '',
       phoneNumber: '',
       address: '',
-      city: '', 
-      country: '', 
-      region: '', 
+      role: '', 
       ...props,
     };
     this.render();
@@ -22,9 +21,9 @@ class CompaniesTableRow extends Component {
 
   render() {
     const {
-      selected, name, email, phoneNumber, address, city, country, region,
+      selected, username, fullName, email, phoneNumber, address, role,
     } = this.state;
-  
+
     this.$.innerHTML = `
       <td class="text-align-center p-0">
         <input 
@@ -34,18 +33,12 @@ class CompaniesTableRow extends Component {
           ${selected ? 'checked' : ''}
           />
       </td>
-      <td>${name}</td>
-      <td>${email}</td>
-      <td>${phoneNumber}</td>
-      <td>${address}</td>
-      <td>${city}</td>
-      <td>
-        <div class="flex-col gap-4">
-          <span>${country}</span>
-          <span class="text-gray">${region}</span>
-        </div>
-      </td>
-
+      <td>${username ?? ''}</td>
+      <td>${fullName ?? ''}</td>
+      <td>${email ?? ''}</td>
+      <td>${phoneNumber ?? ''}</td>
+      <td>${address ?? ''}</td>
+      <td>${role === 'ADMIN' ? 'Admin' : 'Básico'}</td>
 
       <td class="text-align-center p-0 flex justify-content-center">
 
@@ -75,10 +68,10 @@ class CompaniesTableRow extends Component {
     chkInput.addEventListener('update', () => this.onChkInputUpdate(chkInput));
 
     const deleteBtn = this.$.querySelector('[data-select="delete-button"]');
-    deleteBtn.addEventListener('click', () => document.dispatchEvent(new CustomEvent('delete-company', {detail: {id: this.state.id}})));
+    deleteBtn.addEventListener('click', () => document.dispatchEvent(new CustomEvent('delete-user', {detail: {id: this.state.id}})));
 
     const editBtn = this.$.querySelector('[data-select="edit-button"]');
-    editBtn.addEventListener('click', () => document.dispatchEvent(new CustomEvent('edit-company', {detail: {id: this.state.id}})));
+    editBtn.addEventListener('click', () => document.dispatchEvent(new CustomEvent('edit-user', {detail: {id: this.state.id}})));
   
     return this;
   }
@@ -107,4 +100,4 @@ class CompaniesTableRow extends Component {
 
 }
 
-export default CompaniesTableRow;
+export default UsersTableRow;

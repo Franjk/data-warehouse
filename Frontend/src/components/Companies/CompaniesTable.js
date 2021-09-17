@@ -118,11 +118,15 @@ class CompaniesTable extends Component {
       });
 
     const btnOrderName = this.$.querySelector('[data-select="btn-order-name"]');
+    const btnOrderEmail = this.$.querySelector('[data-select="btn-order-email"]');
+    const btnOrderPhoneNumber = this.$.querySelector('[data-select="btn-order-phoneNumber"]');
     const btnOrderAddress = this.$.querySelector('[data-select="btn-order-address"]');
     const btnOrderCity = this.$.querySelector('[data-select="btn-order-city"]');
     const btnOrderCountry = this.$.querySelector('[data-select="btn-order-country"]');
 
     btnOrderName.addEventListener('click', () => this.reorderTable('name'));
+    btnOrderEmail.addEventListener('click', () => this.reorderTable('email'));
+    btnOrderPhoneNumber.addEventListener('click', () => this.reorderTable('phoneNumber'));
     btnOrderAddress.addEventListener('click', () => this.reorderTable('address'));
     btnOrderCity.addEventListener('click', () => this.reorderTable('city'));
     btnOrderCountry.addEventListener('click', () => this.reorderTable('country'));

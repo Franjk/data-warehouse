@@ -1,4 +1,4 @@
-import { Component } from '../libs/xQuery/xQuery.js';
+import { Component } from '../../libs/xQuery/xQuery.js';
 
 class ContactsTableRow extends Component {
   constructor(parentEl, props) {
@@ -73,19 +73,19 @@ class ContactsTableRow extends Component {
         <div class="flex gap-8">
           <span class="material-icons">account_circle</span>
           <div class="flex-col gap-4">
-            <span>${name}</span>
-            <span class="text-gray">${email}</span>
+            <span>${name ?? ''}</span>
+            <span class="text-gray">${email ?? ''}</span>
           </div>
         </div>
       </td>
       <td>
         <div class="flex-col gap-4">
-          <span>${country}</span>
-          <span class="text-gray">${region}</span>
+          <span>${country ?? ''}</span>
+          <span class="text-gray">${region ?? ''}</span>
         </div>
       </td>
-      <td>${company}</td>
-      <td>${position}</td>
+      <td>${company ?? ''}</td>
+      <td>${position ?? ''}</td>
 
       <td>
         <span class="flex align-items-center gap-4">
