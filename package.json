@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev-front": "live-server Frontend",
-    "front": "http-server Frontend",
+    "start-frontend": "http-server Frontend",
     "dev-back": "nodemon Backend/app.js",
-    "back": "node Backend/app.js"
+    "start-backend": "node Backend/app.js"
   },
   "keywords": [],
   "author": "",
