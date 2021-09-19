@@ -1021,6 +1021,7 @@ select.mini-input {
 
 .treeview {
   font-size: 18px;
+  margin-left: 100px;
 }
 
 .treeview li {
@@ -1035,12 +1036,12 @@ select.mini-input {
 .treeview .level-2 {
   font-size: 16px;
   font-weight: 400;
-  margin-left: 32px;
+  margin-left: 64px;
 }
 
 .treeview .level-3 {
   font-size: 14px;
-  margin-left: 64px;
+  margin-left: 128px;
 }
 
 .treeview .treeview-item {

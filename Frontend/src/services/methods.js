@@ -84,7 +84,12 @@ export async function destroy(url, body = '') {
         body: JSON.stringify(body)
       });
     } else {
-      res = await fetch(objUrl, {method: 'DELETE'});
+      res = await fetch(objUrl, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
     }
     const data = await res.json();
     return data;

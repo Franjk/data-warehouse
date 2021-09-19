@@ -2,8 +2,8 @@ import { Component } from '../libs/xQuery/xQuery.js';
 
 class Navbar extends Component {
   constructor(parentEl, props) {
-    super(document.createElement('nav'))
-    this.state = { ...props }
+    super(document.createElement('nav'));
+    this.state = { ...props };
     this.render();
 
     parentEl.appendChild(this.$);
@@ -15,7 +15,10 @@ class Navbar extends Component {
 
     this.$.innerHTML = `
     <nav class="navbar">
-      <div class="navbar-logo">LOGO</div>
+      <div class="navbar-logo">
+        <img src="../../assets/favicon.png" alt="data-warehouse-logo" class="mr-16"></img>
+        Data Warehouse
+      </div>
       <div class="navbar-menu">
         ${links.map(l => (`
           <div class="navbar-item ${l.active && 'active'}">
@@ -24,7 +27,7 @@ class Navbar extends Component {
           `)).join(' ')}
       </div>
     </nav>
-    `
+    `;
     return this;
   }
 }

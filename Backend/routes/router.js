@@ -15,12 +15,12 @@ const router = express.Router();
 
 router.use('/auth', authRouter);
 
-router.use(authenticator, authorizer('BASICO'), '/channels', channelsRouter);
-router.use(authenticator, authorizer('BASICO'), '/cities', citiesRouter);
-router.use(authenticator, authorizer('BASICO'), '/companies', companiesRouter);
-router.use(authenticator, authorizer('BASICO'), '/contacts', contactsRouter);
-router.use(authenticator, authorizer('BASICO'), '/countries', countriesRouter);
-router.use(authenticator, authorizer('BASICO'), '/regions', regionsRouter);
-router.use(authenticator, authorizer(), '/users', usersRouter);
+router.use('/channels', authenticator, authorizer('BASICO'), channelsRouter);
+router.use('/cities', authenticator, authorizer('BASICO'),citiesRouter);
+router.use('/companies', authenticator, authorizer('BASICO'),companiesRouter);
+router.use('/contacts', authenticator, authorizer('BASICO'),contactsRouter);
+router.use('/countries', authenticator, authorizer('BASICO'),countriesRouter);
+router.use('/regions', authenticator, authorizer('BASICO'),regionsRouter);
+router.use('/users', authenticator, authorizer(''),usersRouter);
 
 module.exports = router;
