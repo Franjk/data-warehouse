@@ -1,7 +1,8 @@
 const express = require('express');
-const authRouter = require('./auth.routes');
-// const authenticator = require('../middlewares/authenticator');
+const authenticator = require('../middlewares/authenticator');
+const authorizer = require('../middlewares/authorizer');
 
+const authRouter = require('./auth.routes');
 const channelsRouter = require('./channels.routes');
 const citiesRouter = require('./cities.routes');
 const companiesRouter = require('./companies.routes');
@@ -14,12 +15,12 @@ const router = express.Router();
 
 router.use('/auth', authRouter);
 
-router.use('/channels', channelsRouter);
-router.use('/cities', citiesRouter);
-router.use('/companies', companiesRouter);
-router.use('/contacts', contactsRouter);
-router.use('/countries', countriesRouter);
-router.use('/regions', regionsRouter);
-router.use('/users', usersRouter);
+router.use(authenticator, authorizer('BASICO'), '/channels', channelsRouter);
+router.use(authenticator, authorizer('BASICO'), '/cities', citiesRouter);
+router.use(authenticator, authorizer('BASICO'), '/companies', companiesRouter);
+router.use(authenticator, authorizer('BASICO'), '/contacts', contactsRouter);
+router.use(authenticator, authorizer('BASICO'), '/countries', countriesRouter);
+router.use(authenticator, authorizer('BASICO'), '/regions', regionsRouter);
+router.use(authenticator, authorizer(), '/users', usersRouter);
 
 module.exports = router;

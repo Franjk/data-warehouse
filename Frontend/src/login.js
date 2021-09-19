@@ -1,15 +1,13 @@
 import { $ } from './libs/xQuery/xQuery.js';
-import { Navbar } from './components/index.js';
-import DWApi from './libs/DWApi/DWApi.js';
+import { login } from './services/auth.service.js';
 
-const dw = new DWApi();
 
 function validateUsername() {
   const username = $('#username').value;
   let msg = '';
   
   if (username.length === 0) {
-    msg = 'El nombre de usuario no puede estar vacío.'
+    msg = 'El nombre de usuario no puede estar vacío.';
     updateErrorMessage('#username-error', msg);
     return false;
   }
@@ -23,7 +21,7 @@ function validatePassword() {
   let msg = '';
 
   if (password.length === 0) {
-    msg = 'La contraseña no puede estar vacía.'
+    msg = 'La contraseña no puede estar vacía.';
     updateErrorMessage('#password-error', msg);
     return false;
   }
@@ -56,29 +54,27 @@ async function submitForm(e) {
   e.preventDefault();
   if (!validateForm()) return;
 
-  const res = await dw.login({
+  const res = await login({
     username: $('#username').value, 
     password: $('#password').value,
-  })
+  });
 
-  console.log(res);
-  if (res === 'OK') {
+  console.log('login res', res);
+  if (res.token) {
+    localStorage.setItem('token', res.token);
     window.location.replace('../pages/contacts.html');
   } else {
-    updateErrorMessage('#username-error', res)
+    updateErrorMessage('#username-error', 'Usuario o contraseña incorrecta');
   }
 }
 
 
 
 function initialize() {
-  const navbar = new Navbar();
-  $('#header').appendChild(navbar.$);
-
   $('#username').addEventListener('blur', validateUsername);
   $('#password').addEventListener('blur', validatePassword);
-  $('#submit-button').addEventListener('click', submitForm)
-  $('#login-form').addEventListener('submit', (e) => e.preventDefault())
+  $('#submit-button').addEventListener('click', submitForm);
+  $('#login-form').addEventListener('submit', (e) => e.preventDefault());
 }
 
 

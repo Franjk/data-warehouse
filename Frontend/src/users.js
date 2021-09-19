@@ -3,7 +3,7 @@
 import { UsersForm, UsersTable, Navbar, DeleteConfirmationModal } from './components/index.js';
 import { $ } from './libs/xQuery/xQuery.js';
 import { getUsers, createUser, updateUser, deleteUser, bulkDeleteUser } from './services/user.service.js';
-
+import { authenticate } from './services/auth.service.js';
 
 const $CountSelectedTag = $('#count-selected-tag');
 const $RowsPerPageSelector = $('#rows-per-page-selector');
@@ -21,6 +21,7 @@ const $BulkDeleteBtn = $('#bulk-delete-btn');
 
 let $UsersForm;
 let $Modal;
+let auth;
 
 new Navbar($Header, {links: [
   {name: 'Contactos', path: './contacts.html'},
@@ -181,7 +182,16 @@ async function handleBulkDeleteButtonClick() {
   
 }
 
+async function authenticateUser() {
+  auth = await authenticate();
+  if (auth.err || auth.role !== 'ADMIN') {
+    window.location.replace('../pages/login.html');
+  }
+}
+
 function initialize() {
+  authenticateUser();
+
   document.addEventListener('update-count-selected-tag', handleCountSelectedTagChange);
   document.addEventListener('delete-user', deleteUserEventHandler );
   document.addEventListener('edit-user', editUserEventHandler);

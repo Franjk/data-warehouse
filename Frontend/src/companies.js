@@ -3,6 +3,7 @@
 import { CompaniesForm, CompaniesTable, Navbar, DeleteConfirmationModal } from './components/index.js';
 import { $ } from './libs/xQuery/xQuery.js';
 import { getCompanies, createCompany, updateCompany, deleteCompany, bulkDeleteCompany } from './services/company.service.js';
+import { authenticate } from './services/auth.service.js';
 
 const $CountSelectedTag = $('#count-selected-tag');
 const $RowsPerPageSelector = $('#rows-per-page-selector');
@@ -20,11 +21,11 @@ const $BulkDeleteBtn = $('#bulk-delete-btn');
 
 let $CompaniesForm;
 let $Modal;
+let auth;
 
-new Navbar($Header, {links: [
+const $Navbar = new Navbar($Header, {links: [
   {name: 'Contactos', path: './contacts.html'},
   {name: 'Compañías', path: './companies.html', active: true},
-  {name: 'Usuarios', path: './users.html'},
   {name: 'Región / Ciudad', path: './regions.html'},
 ]});
 
@@ -193,7 +194,24 @@ async function handleBulkDeleteButtonClick() {
   
 }
 
+async function authenticateUser() {
+  auth = await authenticate();
+  if (auth.err) {
+    window.location.replace('../pages/login.html');
+  }
+  if (auth.role === 'ADMIN') {
+    $Navbar.setState({links: [
+      {name: 'Contactos', path: './contacts.html'},
+      {name: 'Compañías', path: './companies.html', active: true},
+      {name: 'Usuarios', path: './users.html'},
+      {name: 'Región / Ciudad', path: './regions.html'},
+    ]});
+  }
+}
+
 function initialize() {
+  authenticateUser();
+
   document.addEventListener('update-count-selected-tag', handleCountSelectedTagChange);
   document.addEventListener('delete-company', deleteCompanyEventHandler );
   document.addEventListener('edit-company', editCompanyEventHandler);

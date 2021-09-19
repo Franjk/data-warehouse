@@ -6,6 +6,7 @@ import { Navbar, DeleteConfirmationModal, RegionTreeView, InputModal } from './c
 import { createCity, getCities,getCity, updateCity, deleteCity } from './services/city.service.js';
 import { createCountry, getCountries, getCountry, updateCountry, deleteCountry } from './services/country.service.js';
 import { createRegion, getRegions, getRegion, updateRegion, deleteRegion } from './services/region.service.js';
+import { authenticate } from './services/auth.service.js';
 
 const $Header = $('#header');
 const $ModalAnchor = $('#modal-anchor');
@@ -14,11 +15,11 @@ const $CreateRegionButton = $('#create-region-button');
 
 let $Modal;
 let $RegionTreeView;
+let auth;
 
-new Navbar($Header, {links: [
+const $Navbar = new Navbar($Header, {links: [
   {name: 'Contactos', path: './contacts.html'},
   {name: 'Compañías', path: './companies.html'},
-  {name: 'Usuarios', path: './users.html'},
   {name: 'Región / Ciudad', path: './regions.html', active: true},
 ]});
 
@@ -221,14 +222,26 @@ function deleteCityHandler(e) {
   });
 }
 
-function removeCity(cityId) {
+async function authenticateUser() {
+  auth = await authenticate();
+  if (auth.err) {
+    window.location.replace('../pages/login.html');
+  }
 
+  if (auth.role === 'ADMIN') {
+    $Navbar.setState({ links: [
+      {name: 'Contactos', path: './contacts.html'},
+      {name: 'Compañías', path: './companies.html'},
+      {name: 'Usuarios', path: './users.html'},
+      {name: 'Región / Ciudad', path: './regions.html', active: true},
+    ]});
+  }
 }
 
 
-
-
 function initialize() {
+  authenticateUser();
+
   $CreateRegionButton.addEventListener('click', createRegionHandler);
   document.addEventListener('edit-region', editRegionHandler);
   document.addEventListener('delete-region', deleteRegionHandler);

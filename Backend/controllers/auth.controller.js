@@ -18,13 +18,26 @@ exports.login = async (req, res) => {
     const user = await User.findOne(query);
     console.log('user', user);
     if (user.password === password) {
-      const token = jwt.sign({ id: user.id, rol: user.rol }, process.env.JWT_SECRET);
+      const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET);
       return res.send({ token });
     }
     return res.status(401).send({ err: 'Invalid credentials' });
   } catch (err) {
     return res.status(400).send({ err });
   }
+};
+
+exports.authenticate = async (req, res) => {
+  const { token } = req.body;
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    return res.send(decoded);
+  } catch(err) {
+    console.log(err);
+    return res.status(401).json({ err: 'Token invalido' });
+  }
+
 };
 
 // No habilitamos la funcion para registrar usuario.

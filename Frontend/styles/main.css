@@ -388,6 +388,10 @@ select.mini-input {
   padding: 40px 30px;
 }
 
+.max-width-1 {
+  max-width: 800px;
+}
+
 .flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -861,6 +865,10 @@ select.mini-input {
       -ms-flex-pack: start;
           justify-content: flex-start;
   width: 100%;
+}
+
+.form-padding {
+  padding: 32px;
 }
 
 .loader {

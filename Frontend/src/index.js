@@ -1,10 +1,8 @@
-import DWApi from './libs/DWApi/DWApi.js';
-
-const dw = new DWApi();
+import { authenticate } from './services/auth.service.js';
 
 async function redirect() {
-  const res = await dw.authenticate();
-  if (res) {
+  const res = await authenticate();
+  if (!res.err) {
     window.location.replace('../pages/contacts.html');
   } else {
     window.location.replace('../pages/login.html');

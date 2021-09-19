@@ -14,7 +14,13 @@ export async function get(url, query) {
   try {
     const parsedQuery = query ? parseQuery(query) : '';
     const objUrl = new URL(`${HOST}/${url}${parsedQuery}`);
-    const res = await fetch(objUrl);
+    const token = localStorage.getItem('token') ?? '';
+    const res = await fetch(objUrl, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
     const data = await res.json();
     return data;
   } catch(err) {
@@ -24,12 +30,15 @@ export async function get(url, query) {
 
 export async function post(url, body) {
   try {
-    console.log('post', JSON.stringify(body));
     const objUrl = new URL(`${HOST}/${url}`);
+    const token = localStorage.getItem('token') ?? '';
 
     const res = await fetch(objUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}` 
+      },
       body: JSON.stringify(body)
     });
 
@@ -43,9 +52,13 @@ export async function post(url, body) {
 export async function put(url, body) {
   try {
     const objUrl = new URL(`${HOST}/${url}`);
+    const token = localStorage.getItem('token') ?? '';
     const res = await fetch(objUrl, {
       method: 'PUT', 
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}` 
+      },
       body: JSON.stringify(body)
     });
     const data = await res.json();
@@ -58,13 +71,16 @@ export async function put(url, body) {
 export async function destroy(url, body = '') {
   try {
     const objUrl = new URL(`${HOST}/${url}`);
-    console.log(JSON.stringify(body));
+    const token = localStorage.getItem('token') ?? '';
 
     let res;
     if (body) {
       res = await fetch(objUrl, {
         method: 'DELETE', 
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
         body: JSON.stringify(body)
       });
     } else {
