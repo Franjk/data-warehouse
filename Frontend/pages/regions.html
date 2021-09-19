@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Data warehouse</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel="icon" type="image/png" href="../assets/favicon.png"/>
+  <link rel='stylesheet' type='text/css' media='screen' href='../styles/main.css'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+  <div id="modal-anchor">
+    <!-- Se inyecta el modal dinamicamente -->
+  </div>
+
+  <div id="form-anchor">
+    <!-- Se inyecta el form dinamicamente -->
+  </div>
+
+  <header id="header">
+    <!-- Se inyecta el navbar dinamicamente -->
+  </header>
+
+  <main class="container">
+    <h1 class="title">Región / Ciudad</h1>
+
+    <section class="mb-32">
+      <div class="flex justify-content-space-between mb-4">
+        <div></div>
+  
+        <div class="input-group">
+          <button id="create-region-button" class="btn btn-primary">Agregar región</button>
+        </div>
+  
+      </div>
+
+    </section>
+
+    <section>
+
+      <div id="tree-container">
+
+
+        <!-- <div class="treeview">
+          <ul class="level-1">
+            <li>
+
+                <div class="flex justify-content-space-between">
+                  <div class="flex gap-16">
+                    <div class="treeview-item">Sudamerica</div>
+                    <button class="btn btn-primary xs">Editar</button>
+                    <button class="btn btn-danger xs">Eliminar</button>
+                  </div>
+                  <button class="btn btn-primary xs">Agregar País</button>
+                </div>
+
+              <ul class="level-2">
+                <li>
+                  <div class="flex justify-content-space-between">
+                    <div class="flex gap-16">
+                      <div class="treeview-item">Argentina</div>
+                      <button class="btn btn-primary xs">Editar</button>
+                      <button class="btn btn-danger xs">Eliminar</button>
+                    </div>
+                    <button class="btn btn-primary xs">Agregar Ciudad</button>
+                  </div>
+                  <ul class="level-3">
+                    <li>
+                      <div class="flex gap-16">
+                        <div class="treeview-item">Buenos Aires</div>
+                        <button class="btn btn-primary xs">Editar</button>
+                        <button class="btn btn-danger xs">Eliminar</button>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="flex gap-16">
+                        <div class="treeview-item">Rosario</div>
+                        <button class="btn btn-primary xs">Editar</button>
+                        <button class="btn btn-danger xs">Eliminar</button>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Colombia
+                  <ul class="level-3">
+                    <li>Medellin</li>
+                    <li>Bogota</li>
+                  </ul>
+                </li>
+                <li>
+                  Uruguay
+                  <ul class="level-3">
+                    <li>Montevideo</li>
+                    <li>Colonia</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              Norteamerica
+              <ul class="level-2">
+                <li>
+                  Argentina
+                  <ul class="level-3">
+                    <li>Buenos aires</li>
+                    <li>Rosario</li>
+                  </ul>
+                </li>
+                <li>
+                  Colombia
+                  <ul class="level-3">
+                    <li>Medellin</li>
+                    <li>Bogota</li>
+                  </ul>
+                </li>
+                <li>
+                  Uruguay
+                  <ul class="level-3">
+                    <li>Montevideo</li>
+                    <li>Colonia</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+
+        </div> -->
+
+      </div>
+
+    </section>
+  </main>
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src='../src/regions.js' type="module"></script>
+  <script src="../src/styles.js"></script>
+</body>
+</html>

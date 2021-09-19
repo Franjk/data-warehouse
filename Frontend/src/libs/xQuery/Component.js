@@ -82,6 +82,10 @@ class Component {
     return this;
   }
 
+  syncState() {
+    //
+  }
+
   toggleClass(className) {
     this.$.classList.toggle(className);
     return this;

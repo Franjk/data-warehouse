@@ -131,6 +131,11 @@ button {
   width: 131px;
 }
 
+.btn.xs, .btn-icon.xs {
+  width: 68px;
+  height: 32px;
+}
+
 .btn-icon {
   height: 42px;
   width: 42px;
@@ -140,6 +145,13 @@ button {
   background-color: var(--color-blue);
   border: 1px solid var(--color-blue);
   color: var(--color-white);
+}
+
+.btn-primary-outline {
+  background-color: var(--color-white);
+  border: transparent;
+  color: var(--color-blue);
+  font-weight: bold;
 }
 
 .btn-secondary {
@@ -165,6 +177,12 @@ button {
   border: transparent;
   color: var(--color-red);
   font-weight: bold;
+}
+
+.btn-danger {
+  background-color: var(--color-red);
+  border: 1px solid var(--color-red);
+  color: var(--color-white);
 }
 
 .tag {
@@ -993,6 +1011,34 @@ select.mini-input {
   width: 100vw;
 }
 
+.treeview {
+  font-size: 18px;
+}
+
+.treeview li {
+  margin-top: 8px;
+}
+
+.treeview .level-1 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.treeview .level-2 {
+  font-size: 16px;
+  font-weight: 400;
+  margin-left: 32px;
+}
+
+.treeview .level-3 {
+  font-size: 14px;
+  margin-left: 64px;
+}
+
+.treeview .treeview-item {
+  min-width: 100px;
+}
+
 .clickable {
   cursor: pointer;
 }
@@ -1050,12 +1096,17 @@ select.mini-input {
   padding: 0 !important;
 }
 
+.py-4 {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
 .mb-4 {
   margin-bottom: 4px;
 }
 
 .mb-16 {
-  margin-bottom: 16px;
+  margin-bottom: 16px !important;
 }
 
 .mb-24 {
@@ -1080,6 +1131,22 @@ select.mini-input {
 
 .ml-48 {
   margin-left: 48px;
+}
+
+.mr-4 {
+  margin-right: 4px;
+}
+
+.mr-16 {
+  margin-right: 16px;
+}
+
+.mr-32 {
+  margin-right: 32px;
+}
+
+.mr-48 {
+  margin-right: 48px;
 }
 
 .vh-60 {
